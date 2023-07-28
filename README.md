@@ -1,2 +1,2 @@
-# project2
-sei group project
+# Nurse Booking
+SEI 05 - PROJECT 2
