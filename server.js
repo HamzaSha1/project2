@@ -7,8 +7,15 @@ const logger = require('morgan');
 // It's very important to require dotenv before any other module
 // that depends upon the properties added to process.env 
 require('dotenv').config();
-// connect to the database with AFTER the config vars are processed
+//
 require('./config/database');
+// 
+require('./config/passport');
+
+//
+var session = require('express-session');
+//
+var passport = require('passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -24,6 +31,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Configure and Mount Session Middleware
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Mount Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Now the logged in user is in a user variable that's available inside all EJS templates
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
