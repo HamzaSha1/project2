@@ -1,0 +1,24 @@
+<%- include('../partials/header') %>
+
+<h1>List of Nurses</h1>
+
+<table id="list">
+    <thead>
+      <tr>
+        <th>Nurse Name</th>
+        <th>Price</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% filteredNurses.forEach(function(m) { %>
+        <tr>
+          <td><a href="/clients/clientNurseDetails/<%= m._id %>"><%= m.name %></a></td>
+          <td><%= m.price %></td>
+          <td><a href="/clients/clientBookingPage/<%= m._id %>">Quick Book</a></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+<%- include('../partials/footer') %>
