@@ -6,7 +6,7 @@ const reviewSchema = new Schema({
   starRating: Number,
 });
 
-const userSchema = Schema(
+const userSchema = new Schema(
   {
     name: {
       type: String,
@@ -28,20 +28,20 @@ const userSchema = Schema(
       default: "Customer",
     },
     address: String,
-    phoneNumber: { Type: Number, required: false },
+    phoneNumber: { type: Number },
     avatar: String,
     qualifications: {
-      Type: Array,
+      type: Array,
       of: String,
       required: true,
     },
     education: {
-      Type: Array,
+      type: Array,
       of: String,
       required: true,
     },
     reviews: [reviewSchema],
-    price: { Type: Number, required: true },
+    price: { type: Number, required: true },
   },
   {
     timestamps: true,

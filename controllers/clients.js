@@ -19,15 +19,8 @@ async function index(req, res) {
 
 async function nurseDetails(req, res) {
   // Populate the cast array with performer docs instead of ObjectIds
-  const user = await User.findById(req.params.id);
-  // Mongoose query builder approach to retrieve performers not the movie:
-  // Performer.find({}).where('_id').nin(movie.cast)
-  // The native MongoDB approach uses a query object to find
-  // performer docs whose _ids are not in the movie.cast array like this:
-  const performers = await Performer.find({
-    _id: { $nin: movie.reviews },
-  }).sort("name");
-  res.render("movies/show", { title: "Movie Detail", movie, performers });
+  const nurse = await User.findById(req.params.id);
+  res.render("clients/clientNurseDetails", { nurse });
 }
 
 async function temp(req, res) {
