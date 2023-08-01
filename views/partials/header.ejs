@@ -9,16 +9,28 @@
   <script src="https://kit.fontawesome.com/47bb336793.js" crossorigin="anonymous"></script>
   <link rel='stylesheet' href='/stylesheets/style.css'>
 </head>
-<body>
-  <nav>
-    <i class="fa-solid fa-user-nurse"></i>
-    <a href="/" <%- title === 'Home' ? 'class="active"' : '' %>>Home</a>
-    <% if (user) { %>
-      <a href="/logout">LOG OUT</a>
-    <% } else { %>
-      <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-    <% } %>
-  </nav>
+
+<body class="p-0">
+  <div class="container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <a class="bi me-2 link-dark fw-bold text-decoration-none" href="/">Nurse Appointment Booking <i class="fa-solid fa-user-nurse"></i></a>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="/clients/clientHomePage" class="nav-link px-2 link-dark">Find a Nurse</a></li>
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <div class="my-auto col-md-3 ms-auto">
+          <% if (user) { %>
+            <a href="/logout" type="button" class="btn btn-outline-danger me-2">Logout</a>
+          <% } else { %>
+            <a href="/auth/google" type="button" class="login btn btn-outline-secondary">Login&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+          <% } %>
+        </div>
+      </div>
+    </header>
+  </div>
   <main>
+    <div class="container">
     <h1><%= title %></h1>
-  </main>

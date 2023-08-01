@@ -1,7 +1,5 @@
 <%- include('../partials/header') %>
 
-<h1>List of Nurses</h1>
-
 <table id="list">
     <thead>
       <tr>
@@ -11,11 +9,11 @@
       </tr>
     </thead>
     <tbody>
-      <% filteredNurses.forEach(function(m) { %>
+      <% filteredNurses.forEach(function(n) { %>
         <tr>
-          <td><a href="/clients/clientNurseDetails/<%= m._id %>"><%= m.name %></a></td>
-          <td><%= m.price %></td>
-          <td><a href="/clients/clientBookingPage/<%= m._id %>">Quick Book</a></td>
+          <td><a href="/clients/clientNurseDetails/<%= n._id %>"><%= n.name %></a></td>
+          <td><%= n.price %></td>
+          <td><a href="/clients/clientBookingPage/<%= n._id %>">Quick Book</a></td>
         </tr>
         <% }); %>
       </tbody>
