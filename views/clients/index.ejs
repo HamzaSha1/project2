@@ -11,9 +11,9 @@
     <tbody>
       <% filteredNurses.forEach(function(n) { %>
         <tr>
-          <td><a href="/clients/clientNurseDetails/<%= n._id %>"><%= n.name %></a></td>
+          <td><a href="/nurses/details/<%= n._id %>"><%= n.name %></a></td>
           <td><%= n.price %></td>
-          <td><a href="/clients/clientBookingPage/<%= n._id %>">Quick Book</a></td>
+          <td><a href="/nurses/booking/<%= n._id %>">Quick Book</a></td>
         </tr>
         <% }); %>
       </tbody>

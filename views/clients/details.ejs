@@ -1,0 +1,73 @@
+<%- include('../partials/header') %>
+
+<div><%= nurse.name %></div>
+<% let total = 0 %> <% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %> <% }); %>
+<strong><%= (total / nurse.reviews.length).toFixed(1) %></strong>
+
+<h2>Qualifications:</h2>
+<ul>
+  <% nurse.qualifications.forEach(function(qualification) { %>
+  <li><% qualification %></li>
+  <% }); %>
+</ul>
+<h2>Education:</h2>
+<ul>
+  <% nurse.education.forEach(function(edu) { %>
+  <li><% edu %></li>
+  <% }); %>
+</ul>
+
+<form action="/nurses/details/<%= nurse._id %>" method="POST">
+  <textarea name="review" rows="10" cols="50"></textarea>
+  <label for="STARRrating">Rating: </label>
+  <input type="number" name="starRating" max="5" min="1" />
+  <input type="submit" />
+</form>
+<!-- 
+<h2>Reviews: </h2>
+<% if (nurse.reviews.length) { %>
+
+    <ul>
+        <% nurse.reviews.forEach(function(review) { %>
+            <li><% review %></li>
+          <% }); %>
+    </ul>
+    
+  <% } else { %>
+    <h5>No Reviews Yet</h5>
+  <% } %> -->
+
+<% if (nurse.reviews.length) { %>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Review</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% let total = 0 %> <% nurse.reviews.forEach(function(r) { %> <% total +=
+    r.starRating %>
+    <tr>
+      <td class="review-user">
+        <img
+          alt="avatar"
+          src="<%= r.userAvatar %>"
+          referrerpolicy="no-referrer"
+        /><%= r.userName %>
+      </td>
+      <td><%= r.review %></td>
+      <td><%= r.starRating %></td>
+    </tr>
+    <% }); %>
+    <tr>
+      <td colspan="3"></td>
+      <td><strong><%= (total / nurse.reviews.length).toFixed(1) %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<% } else { %>
+<h5>No Reviews Yet</h5>
+<% } %> <%- include('../partials/footer') %>

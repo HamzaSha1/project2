@@ -18,8 +18,8 @@ var session = require("express-session");
 var passport = require("passport");
 
 var indexRouter = require("./routes/index");
-var clientRouter = require("./routes/clients");
 var nurseRouter = require("./routes/nurses");
+// var clientRouter = require("./routes/clients");
 
 var app = express();
 
@@ -54,7 +54,7 @@ app.use(function (req, res, next) {
 
 app.use("/", indexRouter);
 app.use("/nurses", nurseRouter);
-app.use("/clients", clientRouter);
+// app.use("/clients", clientRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
