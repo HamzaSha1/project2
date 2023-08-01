@@ -4,6 +4,7 @@ module.exports = {
   index,
   nurseDetails,
   bookingPage,
+  createReview,
 };
 
 async function index(req, res) {
@@ -11,10 +12,10 @@ async function index(req, res) {
     role: "Nurse",
   });
 
-  const filteredNurses = nurses.filter(nurse => {
+  const filteredNurses = nurses.filter((nurse) => {
     return nurse.role !== "Admin" && nurse.role !== "Customer";
   });
-  res.render("clients/clientHomePage", { title: "Home", filteredNurses});
+  res.render("clients/clientHomePage", { title: "Home", filteredNurses });
 }
 
 async function nurseDetails(req, res) {
@@ -26,4 +27,19 @@ async function nurseDetails(req, res) {
 async function bookingPage(req, res) {
   const nurse = await User.findById(req.params.id);
   res.render("clients/clientBookingPage", { title: "Booking Page", nurse });
+}
+
+async function createReview(req, res) {
+  const nurse = await User.findById(req.params.id);
+  req.body.user = req.user._id;
+  req.body.userName = req.user.name;
+  req.body.userAvatar = req.user.avatar;
+  nurse.reviews.push(req.body);
+  try {
+    // Save any changes made to the movie doc
+    await nurse.save();
+  } catch (err) {
+    console.log(err);
+  }
+  res.redirect(`/clients/clientNurseDetails/${nurse._id}`);
 }

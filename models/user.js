@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const reviewSchema = new Schema({
-  review: String,
-  starRating: Number,
-});
+const reviewSchema = new Schema(
+  {
+    review: String,
+    starRating: Number,
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const userSchema = new Schema(
   {
@@ -33,15 +38,13 @@ const userSchema = new Schema(
     qualifications: {
       type: Array,
       of: String,
-      required: true,
     },
     education: {
       type: Array,
       of: String,
-      required: true,
     },
     reviews: [reviewSchema],
-    price: { type: Number, required: true },
+    price: Number,
   },
   {
     timestamps: true,

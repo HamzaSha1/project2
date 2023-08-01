@@ -12,5 +12,5 @@ const clientsCtrl = require("../controllers/clients");
 router.get("/clientHomePage", clientsCtrl.index);
 router.get("/clientBookingPage/:id", clientsCtrl.bookingPage);
 router.get("/clientNurseDetails/:id", clientsCtrl.nurseDetails);
-
+router.post("/clientNurseDetails/:id", clientsCtrl.createReview);
 module.exports = router;
