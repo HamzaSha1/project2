@@ -14,7 +14,7 @@ async function index(req, res) {
   const filteredNurses = nurses.filter((nurse) => {
     return nurse.role !== "Admin" && nurse.role !== "Customer";
   });
-  res.render("clients/clientHomePage", { filteredNurses });
+  res.render("clients/clientHomePage", { filteredNurses, title: "Home" });
 }
 
 async function nurseDetails(req, res) {
