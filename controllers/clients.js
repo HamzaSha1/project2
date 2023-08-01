@@ -25,5 +25,5 @@ async function nurseDetails(req, res) {
 
 async function bookingPage(req, res) {
   const nurse = await User.findById(req.params.id);
-  res.render("clients/clientBookingPage", { title: "Booking Page", nurse });
+  res.render("clients/clientBookingPage", { title: "Nurse Booking Page", nurse });
 }
