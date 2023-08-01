@@ -2,8 +2,13 @@
 
 <h1>Nurse Details:</h1>
 
-<div></div>
-<div></div>
+<div><%= nurse.name %></div>
+<% let total = 0 %>
+      <% nurse.reviews.forEach(function(r) { %>
+        <% total += r.starRating %>
+      <% }); %>
+      <strong><%= (total / nurse.reviews.length).toFixed(1) %></strong>
+<div><%= nurse.reviews %></div>
 <div></div>
 
 <%- include('../partials/footer') %>
