@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const reviewSchema = new Schema({
+  review: String,
+  starRating: Number,
+});
+
 const userSchema = Schema(
   {
     name: {
@@ -23,8 +28,20 @@ const userSchema = Schema(
       default: "Customer",
     },
     address: String,
-    phoneNumber: Number,
+    phoneNumber: { Type: Number, required: false },
     avatar: String,
+    qualifications: {
+      Type: Array,
+      of: String,
+      required: true,
+    },
+    education: {
+      Type: Array,
+      of: String,
+      required: true,
+    },
+    reviews: [reviewSchema],
+    price: { Type: Number, required: true },
   },
   {
     timestamps: true,

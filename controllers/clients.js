@@ -2,7 +2,7 @@ const User = require("../models/user");
 
 module.exports = {
   index,
-  nurseDetails: show,
+  nurseDetails,
   bookingPage: temp,
 };
 
@@ -17,9 +17,9 @@ async function index(req, res) {
   res.render("clients/clientHomePage", { filteredNurses });
 }
 
-async function show(req, res) {
+async function nurseDetails(req, res) {
   // Populate the cast array with performer docs instead of ObjectIds
-  const user = await User.findById(req.params.id).populate("reviews");
+  const user = await User.findById(req.params.id);
   // Mongoose query builder approach to retrieve performers not the movie:
   // Performer.find({}).where('_id').nin(movie.cast)
   // The native MongoDB approach uses a query object to find
