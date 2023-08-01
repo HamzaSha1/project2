@@ -11,10 +11,10 @@ async function index(req, res) {
   const nurses = await User.find({ role: "Nurse" });
 
   const filteredNurses = nurses.filter((nurse) => {
-    return nurse.role !== "Admin" && nurse.role !== "Customer";
+    return nurse.role !== "Customer";
   });
   
-  res.render("clients/index", {
+  res.render("nurses/index", {
     title: "List of Nurses",
     filteredNurses
   });
@@ -22,7 +22,7 @@ async function index(req, res) {
 
 async function bookingPage(req, res) {
   const nurse = await User.findById(req.params.id);
-  res.render("clients/booking", {
+  res.render("nurses/booking", {
     title: "Nurse Booking Page",
     nurse
   });
@@ -31,7 +31,7 @@ async function bookingPage(req, res) {
 async function nurseDetails(req, res) {
   // Populate the cast array with performer docs instead of ObjectIds
   const nurse = await User.findById(req.params.id);
-  res.render(`clients/details`, {
+  res.render(`nurses/details`, {
     title: "Nurse Details",
     nurse
   });
@@ -49,5 +49,5 @@ async function createReview(req, res) {
   } catch (err) {
     console.log(err);
   }
-  res.redirect(`/clients/details/${nurse._id}`);
+  res.redirect(`/nurses/details/${nurse._id}`);
 }
