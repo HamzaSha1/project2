@@ -42,17 +42,26 @@
     <input type="hidden" name="reviewerId" value="<%= user?._id %>">
     <input type="hidden" name="reviewerName" value="<%= user.name %>">
     <input type="hidden" name="reviewerAvatar" value="<%= user.avatar %>">
-    <label>Review:</label>
-    <textarea name="content"></textarea>
-    <label>Rating:</label>
-    <select name="rating">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5" selected>5</option>
-    </select>
-    <input type="submit" value="Add Review" class="btn btn-success">
+
+    <div class="form-group">
+      <label for="content">Write a Review:</label>
+      <textarea class="form-control" name="content" id="content" rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="rating">Rating:</label>
+      <div class="rating-stars">
+        <i class="fas fa-star star" data-rating="1"></i>
+        <i class="fas fa-star star" data-rating="2"></i>
+        <i class="fas fa-star star" data-rating="3"></i>
+        <i class="fas fa-star star" data-rating="4"></i>
+        <i class="fas fa-star star" data-rating="5"></i>
+      </div>
+
+      <input type="hidden" name="rating" id="rating">
+    </div>
+
+    <button class="btn btn-success" type="submit">Add Review</button>
   </form>
   <% } else if (!user) { %>
     <!-- If the user is not logged in, show a message to prompt them to log in -->
@@ -77,7 +86,15 @@
             <td class="review-user"><img alt="avatar" src="<%= r.reviewerAvatar %>" referrerpolicy="no-referrer" ><%= r.reviewerName %></td>
             <td><%= r.createdAt.toLocaleDateString() %></td>
             <td><%= r.content %></td>
-            <td><%= r.rating %></td>
+            <td>
+              <% for (let i = 1; i <= 5; i++) { %>
+                <% if (r.rating >= i) { %>
+                  <i class="fas fa-star"></i>
+                <% } else { %>
+                  <i class="far fa-star"></i>
+                <% } %>
+              <% } %>
+            </td>
           </tr>
         <% }); %>
         <tr>
@@ -85,12 +102,42 @@
           <td><strong><%= (total / nurse.reviews.length).toFixed(1) %></strong></td>
         </tr>
       </tbody>
-    </table>  
+    </table>
   <% } else { %>
     <h5>No Reviews Yet</h5>
   <% } %>
 
 
+  <script>
+    // JavaScript code to handle star rating selection
+    document.addEventListener("DOMContentLoaded", function() {
+      const stars = document.querySelectorAll(".star");
+      const ratingInput = document.getElementById("rating");
   
+      function updateStars(rating) {
+        stars.forEach((star, index) => {
+          star.classList.toggle("active", index < rating);
+        });
+      }
+  
+      stars.forEach((star, index) => {
+        star.addEventListener("click", () => {
+          const ratingValue = index + 1;
+          ratingInput.value = ratingValue;
+          updateStars(ratingValue);
+        });
+  
+        star.addEventListener("mouseover", () => {
+          const ratingValue = index + 1;
+          updateStars(ratingValue);
+        });
+  
+        star.addEventListener("mouseout", () => {
+          const ratingValue = parseInt(ratingInput.value);
+          updateStars(ratingValue);
+        });
+      });
+    });
+  </script>
 
 <%- include('../partials/footer') %>

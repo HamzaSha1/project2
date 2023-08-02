@@ -24,3 +24,23 @@ a {
 .login img {
   height: 20px;
 }
+
+/* Star rating styles */
+.rating-stars {
+  font-size: 24px;
+}
+
+.star {
+  cursor: pointer;
+}
+
+.star::before {
+  content: '\f005';
+  font-family: FontAwesome;
+  color: #ccc; /* Default star color */
+}
+
+.star:hover::before,
+.star.active::before {
+  color: gold; /* Selected star color */
+}
