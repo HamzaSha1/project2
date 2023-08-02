@@ -6,15 +6,13 @@
 
 <h2>Qualifications:</h2>
 <ul>
-  <% nurse.qualifications.forEach(function(qualification) { %>
-  <li><% qualification %></li>
-  <% }); %>
+  
+  <li><% nurse.qualifications %></li>
+  
 </ul>
 <h2>Education:</h2>
 <ul>
-  <% nurse.education.forEach(function(edu) { %>
-  <li><% edu %></li>
-  <% }); %>
+  <li><% nurse.education %></li>
 </ul>
 
 <form action="/nurses/details/<%= nurse._id %>" method="POST">

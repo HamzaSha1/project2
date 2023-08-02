@@ -6,6 +6,7 @@ module.exports = {
   bookingPage,
   createReview,
   showClientProfile,
+  updateProfile,
 };
 
 async function index(req, res) {
@@ -58,4 +59,10 @@ async function showClientProfile(req, res) {
   console.log(req.params.id);
   const user = await User.findOne({ _id: req.params.id });
   res.render(`nurses/clientProfile`, { title: "Profile", user });
+}
+
+async function updateProfile(req, res) {
+  const userId = req.params.id;
+  const updated_user = await User.updateOne({ _id: userId }, req.body);
+  res.redirect(`/users/${req.params.id}`);
 }
