@@ -1,5 +1,22 @@
 <%- include('../partials/header') %>
 
+<form action="/nurses/<%= user._id %>?_method=PUT" method="POST">
+    <label for="name">Name</label>
+<input type="text" name="name" id="" value="<%= user.name %>">
 
+<label for="role">Role</label>
+<input type="text" name="role" id="" value="<%= user.role %>">
+
+<label for="house">House Number</label>
+<input type="text" name="houseNumber" id="" value="<%= user.houseNumber %>">
+
+<label for="block">Block</label>
+<input type="text" name="block" id="" value="<%= user.block %>">
+
+<label for="roadNumber">Road Number</label>
+<input type="text" name="roadNumber" id="" value="<%= user.roadNumber %>">
+
+<input type="submit" name="" id="">
+</form>
 
 <%- include('../partials/footer') %>

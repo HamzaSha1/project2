@@ -46,14 +46,8 @@ const userSchema = new Schema(
     location: [addressSchema],
     phoneNumber: { type: Number },
     avatar: String,
-    qualifications: {
-      type: Array,
-      of: String,
-    },
-    education: {
-      type: Array,
-      of: String,
-    },
+    qualifications: String,
+    education: String,
     reviews: [reviewSchema],
     price: Number,
   },
