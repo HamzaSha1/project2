@@ -28,9 +28,7 @@
 
 <h4>Education:</h4>
 <ul>
-  <% nurse.education.forEach(function(edu) { %>
-  <li><% edu %></li>
-  <% }); %>
+  <li><% nurse.education %></li>
 </ul>
 
 <form action="/nurses/details/<%= nurse._id %>" method="POST">
