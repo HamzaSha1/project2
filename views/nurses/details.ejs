@@ -88,7 +88,21 @@
     <h5>No Reviews Yet</h5>
   <% } %>
 
+<form action="/bookings/<%= nurse._id %>" method="POST">
+  <label for="bookings">Book Timeslot</label>
+  <select name="timeslot" id="">
+    <option value="9-10">9-10</option>
+    <option value="10-11">10-11</option>
+    <option value="10-12">10-12</option>
+    <option value="12-13">12-13</option>
+    <option value="13-14">13-14</option>
+    <option value="14-15">14-15</option>
+    <option value="15-16">15-16</option>
+    <option value="16-17">16-17</option>
 
+
+  </select>
+</form>
   
 
 <%- include('../partials/footer') %>
