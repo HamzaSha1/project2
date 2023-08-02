@@ -9,6 +9,7 @@ const reviewSchema = new Schema({
   reviewerId: String,
   reviewerName: String,
   reviewerAvatar: String,
+  reviewerRole: String,
   rating: {
     type: Number,
     min: 1,
