@@ -17,20 +17,26 @@
     </fieldset>
   </form>
 
+  <h3><%= user.name %></h3>
+
+
 
 <% let total = 0 %>
 <% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %> <% }); %>
 
 <h4>Qualifications:</h4>
+<hr>
 <ul>
   <li><%= nurse.qualifications %></li>
 </ul>
 
 <h4>Education:</h4>
+<hr>
 <ul>
   <li><% nurse.education %></li>
 </ul>
 
+<h4>Reviews</h4>
 <form action="/nurses/details/<%= nurse._id %>" method="POST">
   <textarea name="review" rows="10" cols="50"></textarea>
   <label for="STARRrating">Rating: </label>
@@ -61,8 +67,10 @@
     </tr>
   </thead>
   <tbody>
-    <% let total = 0 %> <% nurse.reviews.forEach(function(r) { %> <% total +=
-    r.starRating %>
+    <% let total = 0 %>
+    <% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %>
+      <% console.log(`AVATAR ===> ${r.userAvatar}`) %>
+      <% console.log(`REVIEW ===> ${JSON.stringify(r)}`) %>
     <tr>
       <td class="review-user">
         <img
@@ -84,4 +92,6 @@
 
 <% } else { %>
 <h5>No Reviews Yet</h5>
-<% } %> <%- include('../partials/footer') %>
+<% } %>
+
+<%- include('../partials/footer') %>
