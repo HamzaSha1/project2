@@ -29,6 +29,7 @@ async function update(req, res) {
     const userId = req.params.id;
 
     const updated_user = await User.updateOne({_id: userId},req.body)
+    updated_user
     res.redirect(`/users/${req.params.id}`);
 
     // await User.updateOne(req.params.id, req.body);
