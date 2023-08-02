@@ -18,9 +18,10 @@ var session = require("express-session");
 //
 var passport = require("passport");
 
-var indexRouter = require("./routes/index");
-var nurseRouter = require("./routes/nurses");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const nurseRouter = require("./routes/nurses");
+const usersRouter = require("./routes/users");
+const reviewsRouter = require('./routes/reviews');
 // var clientRouter = require("./routes/clients");
 
 var app = express();
@@ -59,6 +60,7 @@ app.use(methodOverride('_method'));
 app.use("/", indexRouter);
 app.use("/nurses", nurseRouter);
 app.use("/users", usersRouter);
+app.use('/', reviewsRouter);
 // app.use("/clients", clientRouter);
 
 // catch 404 and forward to error handler
