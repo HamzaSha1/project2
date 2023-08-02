@@ -5,6 +5,7 @@ module.exports = {
   nurseDetails,
   bookingPage,
   createReview,
+  showClientProfile,
 };
 
 async function index(req, res) {
@@ -13,10 +14,10 @@ async function index(req, res) {
   const filteredNurses = nurses.filter((nurse) => {
     return nurse.role !== "Customer";
   });
-  
+
   res.render("nurses/index", {
     title: "List of Nurses",
-    filteredNurses
+    filteredNurses,
   });
 }
 
@@ -24,7 +25,7 @@ async function bookingPage(req, res) {
   const nurse = await User.findById(req.params.id);
   res.render("nurses/booking", {
     title: "Nurse Booking Page",
-    nurse
+    nurse,
   });
 }
 
@@ -33,7 +34,7 @@ async function nurseDetails(req, res) {
   const nurse = await User.findById(req.params.id);
   res.render(`nurses/details`, {
     title: "Nurse Details",
-    nurse
+    nurse,
   });
 }
 
@@ -50,4 +51,10 @@ async function createReview(req, res) {
     console.log(err);
   }
   res.redirect(`/nurses/details/${nurse._id}`);
+}
+
+async function showClientProfile(req, res) {
+  // const userID = await User.findOne({ role: "Nurse" });
+  console.log(req.params.id);
+  res.render(`nurses/clientProfile`, { title: "Profile" });
 }

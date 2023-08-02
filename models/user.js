@@ -11,6 +11,17 @@ const reviewSchema = new Schema(
   }
 );
 
+const addressSchema = new Schema(
+  {
+    houseNumber: String,
+    block: String,
+    roadNumber: String,
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const userSchema = new Schema(
   {
     name: {
@@ -32,7 +43,7 @@ const userSchema = new Schema(
       enum: ["Nurse", "Customer"],
       default: "Customer",
     },
-    address: String,
+    location: [addressSchema],
     phoneNumber: { type: Number },
     avatar: String,
     qualifications: {
