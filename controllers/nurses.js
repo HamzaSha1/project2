@@ -56,5 +56,6 @@ async function createReview(req, res) {
 async function showClientProfile(req, res) {
   // const userID = await User.findOne({ role: "Nurse" });
   console.log(req.params.id);
-  res.render(`nurses/clientProfile`, { title: "Profile" });
+  const user = await User.findOne({ _id: req.params.id });
+  res.render(`nurses/clientProfile`, { title: "Profile", user });
 }
