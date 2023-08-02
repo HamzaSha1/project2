@@ -45,5 +45,9 @@ async function show(req, res) {
 }
 
 async function deleteNurse(req, res) {
-  const nurse = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id);
+  if (user) {
+    await user.deleteOne();
+    res.redirect("/");
+  }
 }
