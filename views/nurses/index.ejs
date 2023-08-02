@@ -10,9 +10,9 @@
     </tr>
   </thead>
   <tbody>
-    <% filteredNurses.forEach(function(n) { %>
+    <% filteredNurses.forEach(function(n, index) { %>
     <tr>
-      <th scope="row">1</th>
+      <th scope="row"><%= index+1 %></th>
       <td><%= n.name %></td>
       <td><%= n.price %> BD</td>
       <td><a href="/nurses/details/<%= n._id %>">Quick Book</a></td>

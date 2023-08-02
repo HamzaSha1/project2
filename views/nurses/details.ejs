@@ -21,17 +21,14 @@
 <% let total = 0 %>
 <% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %> <% }); %>
 
-<h2>Qualifications:</h2>
+<h4>Qualifications:</h4>
 <ul>
-  <% nurse.qualifications.forEach(function(qualification) { %>
-  <li><% qualification %></li>
-  <% }); %>
+  <li><%= nurse.qualifications %></li>
 </ul>
-<h2>Education:</h2>
+
+<h4>Education:</h4>
 <ul>
-  <% nurse.education.forEach(function(edu) { %>
-  <li><% edu %></li>
-  <% }); %>
+  <li><%= nurse.education %></li>
 </ul>
 
 <form action="/nurses/details/<%= nurse._id %>" method="POST">
