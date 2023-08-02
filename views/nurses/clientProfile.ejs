@@ -4,17 +4,19 @@
 <label for="name">Name</label>
 <input type="text" name="name" id="" value="<%= user.name %>">
 
-<label for="role">Role</label>
-<input type="text" name="role" id="" value="<%= user.role %>">
-
+<label for="rolee">Choose your role: </label>
+<select name="role" id="">
+    <option value="Customer">Customer</option>
+    <option value="Nurse">Nurse</option>
+</select>
 <label for="house">House Number</label>
-<input type="text" name="houseNumber" id="" value="<%= user.houseNumber %>">
+<input type="text" name="houseNumber" id="" value="<%= user.location.houseNumber %>">
 
 <label for="block">Block</label>
-<input type="text" name="block" id="" value="<%= user.block %>">
+<input type="text" name="block" id="" value="<%= user.location.block %>">
 
 <label for="roadNumber">Road Number</label>
-<input type="text" name="roadNumber" id="" value="<%= user.roadNumber %>">
+<input type="text" name="roadNumber" id="" value="<%= user.location.roadNumber %>">
 
 <input type="submit" name="" id="">
 </form>
