@@ -1,15 +1,35 @@
 <%- include('../partials/header') %>
 
+<% if(user.role === "Nurse") { %>
 
 <section id="show-page">
 <div>Nurse Name: </div>
 <div><%= user.name %></div>
 <div>email Address: </div>
 <div><%= user.email %></div>
+<div>Qualifications: </div>
+<div><%= user.qualifications %></div>
+<div>Education: </div>
+<div><%= user.education %></div>
+<div>Price: </div>
+<div>$<%= user.price %></div>
 <div><a href="/users/<%= user._id %>/edit">Edit Details</a></div>
-
-
 </section>
 
+<% } else { %> 
+
+    <section id="show-page">
+        <div>Nurse Name: </div>
+        <div><%= user.name %></div>
+        <div>email Address: </div>
+        <div><%= user.email %></div>
+        <div>House Number: </div>
+        <div><%= user.location.houseNumber %></div>
+        <div>Block: </div>
+        <div><%= user.location.block %></div>
+        <div>Road Number: </div>
+        <div><%= user.location.roadNumber %></div>
+        <div><a href="/nurses/clientProfile/<%= user._id %>">Edit Details</a></div>
+<% } %>
 
 <%- include('../partials/footer') %>

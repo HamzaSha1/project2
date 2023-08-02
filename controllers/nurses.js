@@ -53,6 +53,7 @@ async function createReview(req, res) {
   res.redirect(`/nurses/details/${nurse._id}`);
 }
 
+// this shows the actual data of the profile ---> it changes based on if the role is nurse or customer
 async function showClientProfile(req, res) {
   // const userID = await User.findOne({ role: "Nurse" });
   console.log(req.params.id);
@@ -62,6 +63,6 @@ async function showClientProfile(req, res) {
 
 async function updateProfile(req, res) {
   const userId = req.params.id;
-  const updated_user = await User.updateOne({ _id: userId }, req.body);
-  res.redirect(`/users/${req.params.id}`);
+  await User.updateOne({ _id: userId }, req.body);
+  res.redirect(`/nurses/clientProfile/${req.params.id}`);
 }
