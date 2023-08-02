@@ -14,6 +14,7 @@
 <div>Price: </div>
 <div>$<%= user.price %></div>
 <div><a href="/users/<%= user._id %>/edit">Edit Details</a></div>
+<div><a href="/users/<%= user._id %>/delete">Delete account</a></div>
 </section>
 
 <% } else { %> 
@@ -30,6 +31,7 @@
         <div>Road Number: </div>
         <div><%= user.location.roadNumber %></div>
         <div><a href="/nurses/clientProfile/<%= user._id %>">Edit Details</a></div>
+        <div><a href="/nurses/clientProfile/<%= user._id %>">Delete account</a></div>
 <% } %>
 
 <%- include('../partials/footer') %>
