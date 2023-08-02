@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+
+<h1>Create Your Profile</h1>
+
+
+<form id="new-nurse" action="/users/<%=user._id%>?_method=PUT" method="POST">
+<div>
+<label>Add Education:</label>
+<input type="text" name="education" value="<% user.education %>">
+</div>
+<div>
+<label>Add Qualifications:</label>
+<input type="text" name="<% user.qualifications %>">
+</div>
+<div>
+<label>Choose your price per visit:</label>
+<input type="number" name="price" name="<% user.price %>">
+</div>
+<div>
+    <label>Choose your role:</label>
+    <select name="role">
+      <option value="Customer">Customer</option>
+      <option value="Nurse">Nurse</option>
+    </select>
+    </div>
+
+<input type="submit" value="Save">
+<input type="reset" value="Cancel">
+</form>
+
+
+<%- include('../partials/footer') %>

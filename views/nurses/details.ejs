@@ -1,8 +1,25 @@
 <%- include('../partials/header') %>
 
-<div><%= nurse.name %></div>
-<% let total = 0 %> <% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %> <% }); %>
-<strong><%= (total / nurse.reviews.length).toFixed(1) %></strong>
+<form>
+  <form>
+    <fieldset disabled>
+      <div class="row my-3">
+        <hr>
+        <div class="col">
+          <label for="nurseName">Nurse Name</label>
+          <input type="text" id="nurseName" class="form-control" placeholder="<%= nurse.name %>">
+        </div>
+        <div class="col">
+          <label for="nursePrice">Price</label>
+          <input type="text" id="nursePrice" class="form-control" placeholder="<%= nurse.price %> BD">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+
+<% let total = 0 %>
+<% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %> <% }); %>
 
 <h2>Qualifications:</h2>
 <ul>
