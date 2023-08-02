@@ -1,0 +1,15 @@
+<%- include('../partials/header') %>
+
+
+<section id="show-page">
+<div>Nurse Name: </div>
+<div><%= user.name %></div>
+<div>email Address: </div>
+<div><%= user.email %></div>
+<div><a href="/users/<%= user._id %>/edit">Edit Details</a></div>
+
+
+</section>
+
+
+<%- include('../partials/footer') %>
