@@ -30,11 +30,12 @@ async function index(req, res) {
 // }
 
 async function nurseDetails(req, res) {
-  // Populate the cast array with performer docs instead of ObjectIds
   const nurse = await User.findById(req.params.id);
+  console.log(`req.user ==> ${JSON.stringify(req.user)}`);
+  
   res.render(`nurses/details`, {
     title: "Nurse Details",
-    nurse,
+    nurse
   });
 }
 
