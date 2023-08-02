@@ -30,7 +30,7 @@
         <div><%= user.location.block %></div>
         <div>Road Number: </div>
         <div><%= user.location.roadNumber %></div>
-        <div><a href="/nurses/clientProfile/<%= user._id %>">Edit Details</a></div>
+        <div><a href="/nurses/<%= user._id %>/edit">Edit Details</a></div>
 <% } %>
 
 <%- include('../partials/footer') %>
