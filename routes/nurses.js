@@ -12,7 +12,6 @@ const nursesCtrl = require("../controllers/nurses");
 router.get("/", nursesCtrl.index);
 // router.get("/booking/:id", nursesCtrl.bookingPage);
 router.get("/details/:id", nursesCtrl.nurseDetails);
-router.post("/details/:id", nursesCtrl.createReview);
 router.get('/:id/edit', nursesCtrl.edit);
 router.put('/:id', nursesCtrl.update);
 router.get('/:id', nursesCtrl.show);
