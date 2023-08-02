@@ -1,22 +1,24 @@
 <%- include('../partials/header') %>
 
-<table id="list">
-    <thead>
-      <tr>
-        <th>Nurse Name</th>
-        <th>Price</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% filteredNurses.forEach(function(n) { %>
-        <tr>
-          <td><a href="/nurses/details/<%= n._id %>"><%= n.name %></a></td>
-          <td><%= n.price %></td>
-          <td><a href="/nurses/booking/<%= n._id %>">Quick Book</a></td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Consultation Price</th>
+      <th scope="col">Booking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% filteredNurses.forEach(function(n) { %>
+    <tr>
+      <th scope="row">1</th>
+      <td><%= n.name %></td>
+      <td><%= n.price %> BD</td>
+      <td><a href="/nurses/details/<%= n._id %>">Quick Book</a></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>
 
 <%- include('../partials/footer') %>

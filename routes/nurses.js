@@ -10,7 +10,7 @@ const nursesCtrl = require("../controllers/nurses");
 // /nurses/whatever
 
 router.get("/", nursesCtrl.index);
-router.get("/booking/:id", nursesCtrl.bookingPage);
+// router.get("/booking/:id", nursesCtrl.bookingPage);
 router.get("/details/:id", nursesCtrl.nurseDetails);
 router.post("/details/:id", nursesCtrl.createReview);
 router.get("/clientProfile/:id", nursesCtrl.showClientProfile);

@@ -3,7 +3,6 @@ const User = require("../models/user");
 module.exports = {
   index,
   nurseDetails,
-  bookingPage,
   createReview,
   showClientProfile,
 };
@@ -21,13 +20,13 @@ async function index(req, res) {
   });
 }
 
-async function bookingPage(req, res) {
-  const nurse = await User.findById(req.params.id);
-  res.render("nurses/booking", {
-    title: "Nurse Booking Page",
-    nurse,
-  });
-}
+// async function bookingPage(req, res) {
+//   const nurse = await User.findById(req.params.id);
+//   res.render("nurses/booking", {
+//     title: "Nurse Booking Page",
+//     nurse,
+//   });
+// }
 
 async function nurseDetails(req, res) {
   // Populate the cast array with performer docs instead of ObjectIds
