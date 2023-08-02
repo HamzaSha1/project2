@@ -13,7 +13,10 @@ router.get("/", nursesCtrl.index);
 // router.get("/booking/:id", nursesCtrl.bookingPage);
 router.get("/details/:id", nursesCtrl.nurseDetails);
 router.post("/details/:id", nursesCtrl.createReview);
-router.get("/clientProfile/:id", nursesCtrl.showClientProfile);
-router.put("/:id", nursesCtrl.updateProfile);
+router.get('/:id/edit', nursesCtrl.edit);
+router.put('/:id', nursesCtrl.update);
+router.get('/:id', nursesCtrl.show);
 
 module.exports = router;
+
+

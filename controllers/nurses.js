@@ -4,8 +4,9 @@ module.exports = {
   index,
   nurseDetails,
   createReview,
-  showClientProfile,
-  updateProfile,
+  edit,
+  update,
+  show,
 };
 
 async function index(req, res) {
@@ -54,16 +55,41 @@ async function createReview(req, res) {
   res.redirect(`/nurses/details/${nurse._id}`);
 }
 
-// this shows the actual data of the profile ---> it changes based on if the role is nurse or customer
-async function showClientProfile(req, res) {
-  // const userID = await User.findOne({ role: "Nurse" });
-  console.log(req.params.id);
-  const user = await User.findOne({ _id: req.params.id });
-  res.render(`nurses/clientProfile`, { title: "Profile", user });
+
+// GET a edit TODO view
+async function edit(req, res) {
+  const customer = await User.findById(req.params.id);
+  console.log("params id ===> " + req.params.id);
+  console.log("user ===> " + JSON.stringify(customer));
+  res.render('nurses/clientProfile', {
+    customer,
+  title: "customer- edit",
+  });
+}
+// Put call to update a single todo item
+async function update(req, res) {
+  console.log("Body ===> " + JSON.stringify(req.body));
+  // Models are responible for CRUD'ing the data
+  const userId = req.params.id;
+
+  await User.updateOne({_id: userId},req.body)
+  // updated_user
+  res.redirect(`/users/${req.params.id}`);
+
+  // await User.updateOne(req.params.id, req.body);
+  // Always do a redirect when data has been changed
+  
 }
 
-async function updateProfile(req, res) {
-  const userId = req.params.id;
-  await User.updateOne({ _id: userId }, req.body);
-  res.redirect(`/nurses/clientProfile/${req.params.id}`);
+async function show(req, res) {
+  // Populate the cast array with performer docs instead of ObjectIds
+  const customer = await User.findById(req.params.id);
+  // TODO check if user is a nurse?
+  // if user.role !== "Customer"
+
+  //if user is a nurse then render nurse show page
+  res.render("nurses/details", {title: "Show User", user: customer});
+
+  // TODO if not a nurse do this
+
 }
