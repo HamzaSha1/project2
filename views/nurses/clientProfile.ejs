@@ -1,24 +1,24 @@
 <%- include('../partials/header') %>
 
-<form action="/nurses/<%= user._id %>?_method=PUT" method="POST">
-<label for="name">Name</label>
-<input type="text" name="name" id="" value="<%= user.name %>">
 
-<label for="rolee">Choose your role: </label>
-<select name="role" id="">
+<h1>Create Your Profile</h1>
+
+
+<form id="new-customer" action="/nurses/<%=user._id%>?_method=PUT" method="POST">
+<div>
+    <label>houseNumber:</label>
+    <input type="text" name="houseNumber" value="<% user.location.houseNumber %>">
+</div>
+    <label>Choose your role:</label>
+    <select name="role">
     <option value="Customer">Customer</option>
     <option value="Nurse">Nurse</option>
-</select>
-<label for="house">House Number</label>
-<input type="text" name="houseNumber" id="" value="<%= user.location.houseNumber %>">
+    </select>
+</div>
 
-<label for="block">Block</label>
-<input type="text" name="block" id="" value="<%= user.location.block %>">
-
-<label for="roadNumber">Road Number</label>
-<input type="text" name="roadNumber" id="" value="<%= user.location.roadNumber %>">
-
-<input type="submit" name="" id="">
+<input type="submit" value="Save">
+<div><a href="/nurses/<%= user._id %>">Back to Profile</a></div>
 </form>
+
 
 <%- include('../partials/footer') %>
