@@ -33,12 +33,12 @@
   <h4>Education:</h4>
   <hr>
   <ul>
-    <li><% nurse.education %></li>
+    <li><%= nurse.education %></li>
   </ul>
 
   <h4>Reviews:</h4>
   <hr>
-  <% if (user) { %>
+  <% if (user && user?._id.toString() !== nurse._id.toString()) { %>
   <form id="add-review-form" method="POST" action="/nurses/<%= nurse._id %>/reviews">
     <input type="hidden" name="reviewerId" value="<%= user?._id %>">
     <input type="hidden" name="reviewerName" value="<%= user.name %>">
@@ -53,8 +53,11 @@
       <option value="4">4</option>
       <option value="5" selected>5</option>
     </select>
-    <input type="submit" value="Add Review">
+    <input type="submit" value="Add Review" class="btn btn-success">
   </form>
+  <% } else if (!user) { %>
+    <!-- If the user is not logged in, show a message to prompt them to log in -->
+    <p>Please log in to leave a review.</p>
   <% } %>
 
   <% if (nurse.reviews.length) { %>
