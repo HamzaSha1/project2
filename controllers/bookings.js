@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Booking = require("../models/booking");
 
 module.exports = {
   timeslotBooking,
@@ -6,8 +7,28 @@ module.exports = {
 };
 
 async function timeslotBooking(req, res) {
-  const nurse = await User.findById(req.params.id);
-  const Customer = await User.findById(req.body.customerId);
+  const { customerId, nurseId, bookingDate, bookingTime, bookingNotes } =
+    req.body;
+
+  const booking = new Booking({
+    customerId,
+    nurseId,
+    bookingDate,
+    bookingTime,
+    bookingNotes,
+  });
+
+  await booking.save();
+
+  // Add the booking to the user
+  const user = await User.findById(nurseId);
+  user.booking.push(booking);
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    booking,
+  });
 
   // Add booking to customer object
 

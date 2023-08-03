@@ -18,34 +18,6 @@ const reviewSchema = new Schema({
   },
 });
 
-const bookingSchema = new Schema(
-  {
-    customerId: {
-      type: String,
-      required: true
-    },
-    nurseId: {
-      type: String,
-      required: true
-    },
-    bookingDate: {
-      type: Date,
-      required: true
-    },
-    bookingTime: {
-      type: Date,
-      required: true
-    },
-    bookingNotes: {
-      type: String,
-      required: true
-    },
-  },
-  {
-    timestamps: true,
-  }
-);
-
 const userSchema = new Schema(
   {
     name: {
@@ -72,18 +44,24 @@ const userSchema = new Schema(
       blockNumber: String,
       roadNumber: String,
     },
-    phoneNumber: { type: Number,
+    phoneNumber: {
+      type: Number,
       required: true,
       unique: true,
-      minLength: [8, 'Phone number must be at least 8 digits long!'], 
-      maxLength: [8, 'Phone number must be a maximum of 8 digits long!'], 
+      minLength: [8, "Phone number must be at least 8 digits long!"],
+      maxLength: [8, "Phone number must be a maximum of 8 digits long!"],
     },
     avatar: String,
     qualifications: String,
     education: String,
     reviews: [reviewSchema],
     price: Number,
-    booking: [bookingSchema],
+    booking: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "booking",
+      },
+    ],
   },
   {
     timestamps: true,
