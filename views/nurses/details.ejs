@@ -92,6 +92,8 @@
   <% } %>
 
 <form action="/bookings/<%= nurse._id %>" method="POST">
+  <% let userId = user._id %>
+  <input type="hidden" name="customerId" id="" value="<%= userId %>" >
   <label for="bookings">Book Timeslot</label>
   <select name="timeslot" id="">
     <option value="9-10">9-10</option>

@@ -1,29 +1,43 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const reviewSchema = new Schema({
-  content: {
-    type: String,
-    required: true
+const reviewSchema = new Schema(
+  {
+    content: {
+      type: String,
+      required: true,
+    },
+    reviewerId: String,
+    reviewerName: String,
+    reviewerAvatar: String,
+    rating: {
+      type: Number,
+      min: 1,
+      max: 5,
+      default: 5,
+    },
   },
-  reviewerId: String,
-  reviewerName: String,
-  reviewerAvatar: String,
-  rating: {
-    type: Number,
-    min: 1,
-    max: 5,
-    default: 5
+  {
+    timestamps: true,
   }
-}, {
-  timestamps: true
-});
+);
 
 const addressSchema = new Schema(
   {
     houseNumber: String,
     block: String,
     roadNumber: String,
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const bookingSchema = new Schema(
+  {
+    timeslot: String,
+    // nameBooking: { type: String, required: true, unique: true },
+    location: [addressSchema],
   },
   {
     timestamps: true,
@@ -58,6 +72,7 @@ const userSchema = new Schema(
     education: String,
     reviews: [reviewSchema],
     price: Number,
+    booking: [bookingSchema],
   },
   {
     timestamps: true,
