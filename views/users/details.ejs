@@ -1,33 +1,47 @@
 <%- include('../partials/header') %>
 
+<% if(user.role === "Nurse") { %>
+  <form id="new-nurse" action="/users/<%= user._id %>?_method=PUT" method="POST">
+    <div>
+      <label>Add Education:</label>
+      <input type="text" name="education" value="<%= user.education %>" />
+    </div>
+    <div>
+      <label>Add Qualifications:</label>
+      <input type="text" name="qualifications" value="<%= user.qualifications %>" />
+    </div>
+    <div>
+      <label>Choose your price per visit:</label>
+      <input type="number" name="price" value="<%= user.price %>" />
+    </div>
+    <div>
+<% } else if(user.role === 'Customer') { %>
+  <form id="new-nurse" action="/users/<%= user._id %>?_method=PUT" method="POST">
+  <div>
+    <label>Phone Number:</label>
+    <input type="tel" name="phoneNumber" value="<%= user.phoneNumber %>" />
 
-<h1>Create Your Profile</h1>
+    <label>House Number:</label>
+    <input type="text" name="address.houseNumber" value="<%= user.address.houseNumber %>" />
 
+    <label>Block:</label>
+    <input type="text" name="address.blockNumber" value="<%= user.address.blockNumber %>" />
 
-<form id="new-nurse" action="/users/<%=user._id%>?_method=PUT" method="POST">
-<div>
-<label>Add Education:</label>
-<input type="text" name="education" value="<% user.education %>">
-</div>
-<div>
-<label>Add Qualifications:</label>
-<input type="text" name="qualifications" value="<% user.qualifications %>">
-</div>
-<div>
-<label>Choose your price per visit:</label>
-<input type="number" name="price" value="<% user.price %>">
-</div>
-<div>
+    <label>Road Number:</label>
+    <input type="text" name="address.roadNumber" value="<%= user.address.roadNumber %>" />
+  </div>
+<% } %>
+
     <label>Choose your role:</label>
     <select name="role">
       <option value="Customer">Customer</option>
       <option value="Nurse">Nurse</option>
     </select>
-    </div>
 
-<input type="submit" value="Save">
-<div><a href="/users/<%= user._id %>">Back to Profile</a></div>
+  <input type="submit" value="Save" />
+  <div>
+    <a href="/users/<%= user._id %>">Back to Profile</a>
+  </div>
 </form>
-
 
 <%- include('../partials/footer') %>

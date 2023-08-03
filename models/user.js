@@ -18,27 +18,16 @@ const reviewSchema = new Schema({
   },
 });
 
-const addressSchema = new Schema(
-  {
-    houseNumber: String,
-    block: String,
-    roadNumber: String,
-  },
-  {
-    timestamps: true,
-  }
-);
-
-const bookingSchema = new Schema(
-  {
-    timeslot: String,
-    // nameBooking: { type: String, required: true, unique: true },
-    location: [addressSchema],
-  },
-  {
-    timestamps: true,
-  }
-);
+// const bookingSchema = new Schema(
+//   {
+//     timeslot: String,
+//     // nameBooking: { type: String, required: true, unique: true },
+//     location: [addressSchema],
+//   },
+//   {
+//     timestamps: true,
+//   }
+// );
 
 const userSchema = new Schema(
   {
@@ -61,14 +50,18 @@ const userSchema = new Schema(
       enum: ["Nurse", "Customer"],
       default: "Customer",
     },
-    location: [addressSchema],
+    address: {
+      houseNumber: String,
+      blockNumber: String,
+      roadNumber: String,
+    },
     phoneNumber: { type: Number },
     avatar: String,
     qualifications: String,
     education: String,
     reviews: [reviewSchema],
     price: Number,
-    booking: [bookingSchema],
+    // booking: [bookingSchema],
   },
   {
     timestamps: true,
