@@ -38,21 +38,22 @@
   <h5 class="fw-bold">Booking</h5>
   <hr>
   <form action="/bookings/<%= nurse._id %>" method="POST">
+    <input type="hidden" name="nurseId" value="<%= nurse._id %>">
     <input type="hidden" name="customerId" value="<%= user?._id %>">
     <div class="row my-3">
       <div class="col">
         <label for="bookingDate" class="fw-bold">Date</label>
-        <input type="date" id="bookingDate" name="date" class="form-control" placeholder="Date">
+        <input type="date" id="bookingDate" name="bookingDate" class="form-control" placeholder="Date">
       </div>
       <div class="col">
         <label for="bookingTime" class="fw-bold">Time</label>
-        <input type="time" id="bookingTime" name="time" class="form-control" placeholder="Time" step="1h">
+        <input type="time" id="bookingTime" name="bookingTime" class="form-control" placeholder="Time" step="1h">
       </div>
     </div>
     <div class="row my-3">
       <div class="col">
         <label for="bookingNotes" class="fw-bold">Notes</label>
-        <textarea class="form-control" id="bookingNotes" name="notes" rows="3" placeholder="Notes"></textarea>
+        <textarea class="form-control" id="bookingNotes" name="bookingNotes" rows="3" placeholder="Notes"></textarea>
       </div>
     </div>
     <!-- Add address input -->

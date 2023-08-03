@@ -7,8 +7,16 @@ module.exports = {
 };
 
 async function timeslotBooking(req, res) {
-  const { customerId, nurseId, bookingDate, bookingTime, bookingNotes } =
-    req.body;
+  customerId = req.user._id;
+  nurseId = req.params.id;
+  bookingDate = req.body.bookingDate;
+  bookingTime = req.body.bookingTime;
+  bookingNotes = req.body.bookingNotes;
+  console.log(`customerId ==> ${customerId}`);
+  console.log(`nurseId ==> ${nurseId}`);
+  console.log(`bookingDate ==> ${bookingDate}`);
+  console.log(`bookingTime ==> ${bookingTime}`);
+  console.log(`bookingNotes ==> ${bookingNotes}`);
 
   const booking = new Booking({
     customerId,
@@ -20,24 +28,41 @@ async function timeslotBooking(req, res) {
 
   await booking.save();
 
-  // Add the booking to the user
-  const user = await User.findById(nurseId);
-  user.booking.push(booking);
-  await user.save();
+  try {
+    // Add the booking to the user
+    const user = await User.findById(nurseId);
+    console.log(user);
 
-  res.status(200).json({
-    success: true,
-    booking,
-  });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found.",
+      });
+    }
 
-  // Add booking to customer object
+    user.booking.push(booking);
+    await user.save();
 
-  // Add booking to nurse object
+    res.status(200).json({
+      success: true,
+      booking,
+    });
 
-  // Save the updated customer object
+    // Add booking to customer object
 
-  // Save the updated nurse object
+    // Add booking to nurse object
+
+    // Save the updated customer object
+
+    // Save the updated nurse object
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while adding the booking.",
+    });
+  }
 }
+
 
 async function showBookedSessions(req, res) {
   const nurse = await User.findById(req.params.id);
