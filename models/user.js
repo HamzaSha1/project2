@@ -18,16 +18,25 @@ const reviewSchema = new Schema({
   },
 });
 
-// const bookingSchema = new Schema(
-//   {
-//     timeslot: String,
-//     // nameBooking: { type: String, required: true, unique: true },
-//     location: [addressSchema],
-//   },
-//   {
-//     timestamps: true,
-//   }
-// );
+const bookingSchema = new Schema(
+  {
+    timeslot: String,
+    // nameBooking: { type: String, required: true, unique: true },
+    location: {
+      type: mongoose.Schema.Types.Mixed,
+      default: {
+        address: {
+          houseNumber: "",
+          blockNumber: "",
+          roadNumber: "",
+        },
+      },
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const userSchema = new Schema(
   {
@@ -61,7 +70,7 @@ const userSchema = new Schema(
     education: String,
     reviews: [reviewSchema],
     price: Number,
-    // booking: [bookingSchema],
+    booking: [bookingSchema],
   },
   {
     timestamps: true,
