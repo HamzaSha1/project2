@@ -16,10 +16,6 @@
     </fieldset>
   </form>
 
-  <h3><%= user?._id %></h3>
-
-
-
   <% let total = 0 %>
   <% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %> <% }); %>
 
@@ -47,7 +43,7 @@
       </div>
       <div class="col">
         <label for="bookingTime" class="fw-bold">Time</label>
-        <input type="time" id="bookingTime" name="bookingTime" class="form-control" placeholder="Time" step="1h">
+        <input type="text" id="bookingTime" name="bookingTime" class="form-control" placeholder="12:00 PM">
       </div>
     </div>
     <div class="row my-3">
@@ -155,36 +151,47 @@
   </div>
 </section>
 
-  <script>
-    // JavaScript code to handle star rating selection
-    document.addEventListener("DOMContentLoaded", function() {
-      const stars = document.querySelectorAll(".star");
-      const ratingInput = document.getElementById("rating");
-  
-      function updateStars(rating) {
-        stars.forEach((star, index) => {
-          star.classList.toggle("active", index < rating);
-        });
-      }
-  
-      stars.forEach((star, index) => {
-        star.addEventListener("click", () => {
-          const ratingValue = index + 1;
-          ratingInput.value = ratingValue;
-          updateStars(ratingValue);
-        });
-  
-        star.addEventListener("mouseover", () => {
-          const ratingValue = index + 1;
-          updateStars(ratingValue);
-        });
-  
-        star.addEventListener("mouseout", () => {
-          const ratingValue = parseInt(ratingInput.value);
-          updateStars(ratingValue);
-        });
-      });
-    });
-  </script>
+<script src="../../public/javascripts/details.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+flatpickr('#bookingTime', {
+  enableTime: true,  // Enable time selection
+  noCalendar: true,  // Hide the calendar
+  time_24hr: false,  // Switch to 12-hour time mode
+  dateFormat: 'h:i K', // Format to display in 12-hour format with AM/PM
+  minuteIncrement: 30, // Show only 00 and 30 as options for minutes
+  // defaultDate: '12:00', // Set a default time (optional)
+});
+
+const stars = document.querySelectorAll(".star");
+const ratingInput = document.getElementById("rating");
+
+function updateStars(rating) {
+  stars.forEach((star, index) => {
+    star.classList.toggle("active", index < rating);
+  });
+}
+
+stars.forEach((star, index) => {
+  star.addEventListener("click", () => {
+    const ratingValue = index + 1;
+    ratingInput.value = ratingValue;
+    updateStars(ratingValue);
+  });
+
+  star.addEventListener("mouseover", () => {
+    const ratingValue = index + 1;
+    updateStars(ratingValue);
+  });
+
+  star.addEventListener("mouseout", () => {
+    const ratingValue = parseInt(ratingInput.value);
+    updateStars(ratingValue);
+  });
+  });
+});
+</script>
 
 <%- include('../partials/footer') %>
