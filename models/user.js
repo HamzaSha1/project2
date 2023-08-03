@@ -20,17 +20,25 @@ const reviewSchema = new Schema({
 
 const bookingSchema = new Schema(
   {
-    timeslot: String,
-    // nameBooking: { type: String, required: true, unique: true },
-    location: {
-      type: mongoose.Schema.Types.Mixed,
-      default: {
-        address: {
-          houseNumber: "",
-          blockNumber: "",
-          roadNumber: "",
-        },
-      },
+    customerId: {
+      type: String,
+      required: true
+    },
+    nurseId: {
+      type: String,
+      required: true
+    },
+    bookingDate: {
+      type: Date,
+      required: true
+    },
+    bookingTime: {
+      type: Date,
+      required: true
+    },
+    bookingNotes: {
+      type: String,
+      required: true
     },
   },
   {
@@ -64,7 +72,12 @@ const userSchema = new Schema(
       blockNumber: String,
       roadNumber: String,
     },
-    phoneNumber: { type: Number },
+    phoneNumber: { type: Number,
+      required: true,
+      unique: true,
+      minLength: [8, 'Phone number must be at least 8 digits long!'], 
+      maxLength: [8, 'Phone number must be a maximum of 8 digits long!'], 
+    },
     avatar: String,
     qualifications: String,
     education: String,
