@@ -1,8 +1,6 @@
 <%- include('../partials/header') %>
 
-
 <h1>Create Your Profile</h1>
-
 
 <form id="new-customer" action="/nurses/<%=user._id%>?_method=PUT" method="POST">
 <div>
@@ -11,8 +9,8 @@
 </div>
     <label>Choose your role:</label>
     <select name="role">
-    <option value="Customer">Customer</option>
-    <option value="Nurse">Nurse</option>
+        <option value="Customer">Customer</option>
+        <option value="Nurse">Nurse</option>
     </select>
 </div>
 

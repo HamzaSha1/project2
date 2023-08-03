@@ -40,22 +40,6 @@ async function nurseDetails(req, res) {
   });
 }
 
-// async function createReview(req, res) {
-//   const nurse = await User.findById(req.params.id);
-//   req.body.user = req.user._id;
-//   req.body.userName = req.user.name;
-//   req.body.userAvatar = req.user.avatar;
-//   nurse.reviews.push(req.body);
-//   try {
-//     // Save any changes made to the movie doc
-//     await nurse.save();
-//   } catch (err) {
-//     console.log(err);
-//   }
-//   res.redirect(`/nurses/details/${nurse._id}`);
-// }
-
-
 // GET a edit TODO view
 async function edit(req, res) {
   const customer = await User.findById(req.params.id);
@@ -63,16 +47,17 @@ async function edit(req, res) {
   console.log("user ===> " + JSON.stringify(customer));
   res.render('nurses/clientProfile', {
     customer,
-  title: "customer- edit",
+    title: "customer- edit",
   });
 }
+
 // Put call to update a single todo item
 async function update(req, res) {
   console.log("Body ===> " + JSON.stringify(req.body));
   // Models are responible for CRUD'ing the data
   const userId = req.params.id;
 
-  await User.updateOne({_id: userId},req.body)
+  await User.updateOne( {_id: userId}, req.body )
   // updated_user
   res.redirect(`/users/${req.params.id}`);
 
@@ -86,7 +71,7 @@ async function show(req, res) {
   const customer = await User.findById(req.params.id);
   // TODO check if user is a nurse?
   // if user.role !== "Customer"
-
+  
   //if user is a nurse then render nurse show page
   res.render("nurses/details", {title: "Show User", user: customer});
 

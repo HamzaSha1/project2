@@ -4,20 +4,17 @@ const Schema = mongoose.Schema;
 const reviewSchema = new Schema({
   content: {
     type: String,
-    required: true
+    required: true,
   },
   reviewerId: String,
   reviewerName: String,
   reviewerAvatar: String,
-  reviewerRole: String,
   rating: {
     type: Number,
     min: 1,
     max: 5,
-    default: 5
-  }
-}, {
-  timestamps: true
+    default: 5,
+  },
 });
 
 const addressSchema = new Schema(
@@ -25,6 +22,17 @@ const addressSchema = new Schema(
     houseNumber: String,
     block: String,
     roadNumber: String,
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const bookingSchema = new Schema(
+  {
+    timeslot: String,
+    // nameBooking: { type: String, required: true, unique: true },
+    location: [addressSchema],
   },
   {
     timestamps: true,
@@ -59,6 +67,7 @@ const userSchema = new Schema(
     education: String,
     reviews: [reviewSchema],
     price: Number,
+    booking: [bookingSchema],
   },
   {
     timestamps: true,
