@@ -31,6 +31,7 @@
     <li><%= nurse.education %></li>
   </ul>
 
+  <% if(user && user._id.toString() !== nurse._id.toString()) { %>
   <h5 class="fw-bold">Booking</h5>
   <hr>
   <form action="/bookings/<%= nurse._id %>" method="POST">
@@ -75,6 +76,10 @@
       <button class="btn btn-primary my-2" type="submit">Book Now</button>
     </div>
   </form>
+  <% } else if (!user) { %>
+    <!-- If the user is not logged in, show a message to prompt them to log in -->
+    <p>Please <a href="/auth/google">log in</a> to book an appointment.</p>
+  <% } %>
 
   <h5 class="fw-bold">Reviews</h5>
   <hr>
