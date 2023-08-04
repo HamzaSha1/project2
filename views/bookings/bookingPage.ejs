@@ -2,7 +2,7 @@
 
 <% if(user.role === "Nurse") { %>
     <% user.booking.forEach(function(r) { %>
-        <% if(user?._id === r.nurseId) { %>
+        <% if(user?._id.toString() === r.nurseId.toString()) { %>
             <p><%= r.customerName %></p>
             <p><%= r.customerEmail %></p>
             <p><%= r.nursePrice %></p>
@@ -13,7 +13,7 @@
     <% }); %>
 <% } else if(user.role === 'Customer') { %>
     <% user.booking.forEach(function(r) { %>
-        <% if(user?._id === r.customerId) { %>
+        <% if(user?._id.toString() === r.customerId.toString()) { %>
             <p><%= r.nurseName %></p>
             <p><%= r.nurseEmail %></p>
             <p><%= r.nursePrice %></p>
