@@ -1,5 +1,25 @@
 <%- include('../partials/header') %>
 
-
+<% if(user.role === "Nurse") { %>
+    <p><%= user.name %></p>
+    <% user.booking.forEach(function(r) { %>
+        <p><%= r.nurseName %></p>
+        <p><%= r.nurseEmail %></p>
+        <p><%= r.bookingTime %></p>
+        <p><%= r.bookingNotes %></p>
+        <p><%= r.nurseName %></p>
+        <p><%= r.bookingDate %></p>
+        <% }); %>
+    <% } else if(user.role === 'Customer') { %>
+        <p><%= user.booking %> test</p>
+        <% user.booking.forEach(function(r) { %>
+            <p><%= r.nurseName %></p>
+            <p><%= r.nurseEmail %></p>
+            <p><%= r.bookingTime %></p>
+            <p><%= r.bookingNotes %></p>
+            <p><%= r.nurseName %></p>
+            <p><%= r.bookingDate %></p>
+            <% }); %>
+        <% } %>
 
 <%- include('../partials/footer') %>

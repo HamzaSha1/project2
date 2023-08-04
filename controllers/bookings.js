@@ -18,29 +18,45 @@ async function timeslotBooking(req, res) {
   console.log(`bookingTime ==> ${bookingTime}`);
   console.log(`bookingNotes ==> ${bookingNotes}`);
 
+  // Add the booking to the user
+  const nurse = await User.findById(nurseId);
+  const customer = await User.findById(customerId);
+
+  nurseName = nurse.name;
+  nurseEmail = nurse.email;
+  customerName = customer.name;
+  customerEmail = customer.email;
+
   const booking = new Booking({
     customerId,
     nurseId,
     bookingDate,
     bookingTime,
     bookingNotes,
+    nurseName,
+    nurseEmail,
+    customerName,
+    customerEmail,
   });
 
   await booking.save();
 
   try {
-    // Add the booking to the user
-    const user = await User.findById(nurseId);
-
-    if (!user) {
+    const nurse = await User.findById(nurseId);
+    const customer = await User.findById(customerId);
+    if (!nurse || !customer) {
       return res.status(404).json({
         success: false,
         message: "User not found.",
       });
     }
 
-    user.booking.push(booking);
-    await user.save();
+    nurse.booking.push(booking);
+    await nurse.save();
+
+    // saved the booking to the customer as well
+    customer.booking.push(booking);
+    await customer.save();
 
     res.redirect(`/nurses`);
 
@@ -60,9 +76,10 @@ async function timeslotBooking(req, res) {
 }
 
 async function showBookedSessions(req, res) {
-  const nurse = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id);
+  console.log(user.booking);
   res.render(`bookings/bookingPage`, {
     title: "Booking Page",
-    nurse,
+    user,
   });
 }

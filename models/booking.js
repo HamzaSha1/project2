@@ -8,10 +8,15 @@ const bookingSchema = new Schema(
     bookingDate: Date,
     bookingTime: String,
     bookingNotes: String,
+    nurseName: String,
+    customerName: String,
+    nurseEmail: String,
+    customerEmail: String,
   },
   {
     timestamps: true,
   }
 );
+const Booking = mongoose.model("Booking", bookingSchema);
 
-module.exports = mongoose.model("Booking", bookingSchema);
+module.exports = Booking;
