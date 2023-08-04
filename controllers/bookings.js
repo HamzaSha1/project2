@@ -77,9 +77,8 @@ async function timeslotBooking(req, res) {
 
 async function showBookedSessions(req, res) {
   const user = await User.findById(req.params.id).populate("booking");
-  console.log(user);
   res.render(`bookings/bookingPage`, {
     title: "Booking Page",
-    user,
+    user
   });
 }

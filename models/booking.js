@@ -5,6 +5,7 @@ const bookingSchema = new Schema(
   {
     customerId: String,
     nurseId: String,
+    nursePrice: String,
     bookingDate: Date,
     bookingTime: String,
     bookingNotes: String,

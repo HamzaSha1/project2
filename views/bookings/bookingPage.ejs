@@ -1,19 +1,23 @@
 <%- include('../partials/header') %>
 
 <% if(user.role === "Nurse") { %> <%
-user.booking.forEach(function(r) { %>
-    <p><%= r.customerName %></p>
-    <p><%= r.customerEmail %></p>
-    <p><%= r.bookingDate.toLocaleDateString() %></p>
-    <p><%= r.bookingTime %></p>
-    <p><%= r.bookingNotes %></p>
-<% }); %>
+    user.booking.forEach(function(r) { %>
+        <p><%= r.customerName %></p>
+        <p><%= r.customerEmail %></p>
+        <p><%= r.nursePrice %></p>
+        <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
+        <p><%= r.bookingTime %></p>
+        <p><%= r.bookingNotes %></p>
+    <% }); %>
 <% } else if(user.role === 'Customer') { %>
-<% user.booking.forEach(function(r) { %>
-    <p><%= r.nurseName %></p>
-    <p><%= r.nurseEmail %></p>
-    <p><%= r.bookingDate.toLocaleDateString() %></p>
-    <p><%= r.bookingTime %></p>
-    <p><%= r.bookingNotes %></p>
+    <% user.booking.forEach(function(r) { %>
+        <p><%= r.nurseName %></p>
+        <p><%= r.nurseEmail %></p>
+        <p><%= r.nursePrice %></p>
+        <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
+        <p><%= r.bookingTime %></p>
+        <p><%= r.bookingNotes %></p>
+    <% }); %>
+<% } %>
 
-<% }); %> <% } %> <%- include('../partials/footer') %>
+<%- include('../partials/footer') %>
