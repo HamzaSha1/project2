@@ -43,10 +43,7 @@ async function timeslotBooking(req, res) {
     user.booking.push(booking);
     await user.save();
 
-    res.status(200).json({
-      success: true,
-      booking,
-    });
+    res.redirect("/");
 
     // Add booking to customer object
 
@@ -62,7 +59,6 @@ async function timeslotBooking(req, res) {
     });
   }
 }
-
 
 async function showBookedSessions(req, res) {
   const nurse = await User.findById(req.params.id);
