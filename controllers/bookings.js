@@ -2,8 +2,8 @@ const User = require("../models/user");
 const Booking = require("../models/booking");
 
 module.exports = {
-  timeslotBooking,
-  showBookedSessions,
+  book: timeslotBooking,
+  show: showBookedSessions,
 };
 
 async function timeslotBooking(req, res) {
@@ -76,7 +76,7 @@ async function timeslotBooking(req, res) {
 }
 
 async function showBookedSessions(req, res) {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.params.id).populate("booking");
   console.log(user.booking);
   res.render(`bookings/bookingPage`, {
     title: "Booking Page",

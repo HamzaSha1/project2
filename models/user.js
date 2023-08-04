@@ -53,7 +53,7 @@ const userSchema = new Schema(
     booking: [
       {
         type: Schema.Types.ObjectId,
-        ref: "booking",
+        ref: "Booking",
       },
     ],
   },
