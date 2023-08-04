@@ -31,7 +31,6 @@ async function timeslotBooking(req, res) {
   try {
     // Add the booking to the user
     const user = await User.findById(nurseId);
-    console.log(user);
 
     if (!user) {
       return res.status(404).json({
@@ -43,7 +42,7 @@ async function timeslotBooking(req, res) {
     user.booking.push(booking);
     await user.save();
 
-    res.redirect("/");
+    res.redirect(`/nurses`);
 
     // Add booking to customer object
 

@@ -16,10 +16,6 @@
     </fieldset>
   </form>
 
-  <h3><%= user?._id %></h3>
-
-
-
   <% let total = 0 %>
   <% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %> <% }); %>
 
@@ -35,6 +31,7 @@
     <li><%= nurse.education %></li>
   </ul>
 
+  <% if(user && user._id.toString() !== nurse._id.toString()) { %>
   <h5 class="fw-bold">Booking</h5>
   <hr>
   <form action="/bookings/<%= nurse._id %>" method="POST">
@@ -47,38 +44,42 @@
       </div>
       <div class="col">
         <label for="bookingTime" class="fw-bold">Time</label>
-        <input type="time" id="bookingTime" name="bookingTime" class="form-control" placeholder="Time" step="1h">
+        <input type="text" id="bookingTime" name="bookingTime" class="form-control" placeholder="12:00 PM">
       </div>
     </div>
     <div class="row my-3">
       <div class="col">
         <label for="bookingNotes" class="fw-bold">Notes</label>
-        <textarea class="form-control" id="bookingNotes" name="bookingNotes" rows="3" placeholder="Notes"></textarea>
+        <textarea class="form-control" id="bookingNotes" name="bookingNotes" rows="3" placeholder="Notes" autocomplete="off"></textarea>
       </div>
     </div>
     <!-- Add address input -->
     <div class="row my-3">
       <div class="col">
         <label for="houseNumber" class="fw-bold">House Number</label>
-        <input type="text" id="houseNumber" name="address.houseNumber" class="form-control" value="<%= user.address.houseNumber %>">
+        <input type="text" id="houseNumber" name="address.houseNumber" class="form-control" value="<%= user.address.houseNumber %>" autocomplete="off">
       </div>
       <div class="col">
         <label for="roadNumber" class="fw-bold">Road Number</label>
-        <input type="text" id="roadNumber" name="address.roadNumber" class="form-control" value="<%= user.address.roadNumber %>">
+        <input type="text" id="roadNumber" name="address.roadNumber" class="form-control" value="<%= user.address.roadNumber %>" autocomplete="off">
       </div>
       <div class="col">
         <label for="blockNumber" class="fw-bold">Block Number</label>
-        <input type="text" id="blockNumber" name="address.blockNumber" class="form-control" value="<%= user.address.blockNumber %>">
+        <input type="text" id="blockNumber" name="address.blockNumber" class="form-control" value="<%= user.address.blockNumber %>" autocomplete="off">
       </div>
       <div class="col">
         <label for="phoneNumber" class="fw-bold">Phone Number</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" value="<%= user.phoneNumber %>">
+        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" value="<%= user.phoneNumber %>" autocomplete="off">
       </div>
     </div>
     <div class="text-center">
       <button class="btn btn-primary my-2" type="submit">Book Now</button>
     </div>
   </form>
+  <% } else if (!user) { %>
+    <!-- If the user is not logged in, show a message to prompt them to log in -->
+    <p>Please <a href="/auth/google">log in</a> to book an appointment.</p>
+  <% } %>
 
   <h5 class="fw-bold">Reviews</h5>
   <hr>
@@ -90,7 +91,7 @@
     <input type="hidden" name="reviewerRole" value="<%= user.role %>">
 
     <div class="form-group">
-      <textarea class="form-control" name="content" id="content" rows="4" placeholder="Write a Review..."></textarea>
+      <textarea class="form-control" name="content" id="content" rows="4" placeholder="Write a Review..." autocomplete="off"></textarea>
     </div>
 
     <div class="form-group py-2 text-center">
@@ -126,7 +127,14 @@
       <div class="col-md-4 mb-4 mb-md-0">
         <div class="card" style="background-color: #f3f2f2;">
           <div class="card-body py-4 mt-2">
-            <div class="d-flex justify-content-center mb-4">
+          <!-- X button for deletion -->
+          <% if(user && user._id.toString() === r.reviewerId.toString()) { %>
+          <form action="/nurses/<%= nurse._id %>/reviews/<%= r._id %>?_method=DELETE" method="POST">
+            <input type="submit" class="btn btn-danger" style="position: absolute; top: 5px; right: 5px;" value="X"></input>
+          </form>
+          <% } %>
+          <!-- Rest of the card content -->
+          <div class="d-flex justify-content-center mb-4">
               <img src="<%= r.reviewerAvatar %>"
                 class="rounded-circle shadow-1-strong" width="100" height="100" />
             </div>
@@ -155,36 +163,45 @@
   </div>
 </section>
 
-  <script>
-    // JavaScript code to handle star rating selection
-    document.addEventListener("DOMContentLoaded", function() {
-      const stars = document.querySelectorAll(".star");
-      const ratingInput = document.getElementById("rating");
-  
-      function updateStars(rating) {
-        stars.forEach((star, index) => {
-          star.classList.toggle("active", index < rating);
-        });
-      }
-  
-      stars.forEach((star, index) => {
-        star.addEventListener("click", () => {
-          const ratingValue = index + 1;
-          ratingInput.value = ratingValue;
-          updateStars(ratingValue);
-        });
-  
-        star.addEventListener("mouseover", () => {
-          const ratingValue = index + 1;
-          updateStars(ratingValue);
-        });
-  
-        star.addEventListener("mouseout", () => {
-          const ratingValue = parseInt(ratingInput.value);
-          updateStars(ratingValue);
-        });
-      });
-    });
-  </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+flatpickr('#bookingTime', {
+  enableTime: true,  // Enable time selection
+  noCalendar: true,  // Hide the calendar
+  time_24hr: false,  // Switch to 12-hour time mode
+  dateFormat: 'h:i K', // Format to display in 12-hour format with AM/PM
+  minuteIncrement: 30, // Show only 00 and 30 as options for minutes
+  // defaultDate: '12:00', // Set a default time (optional)
+});
+
+const stars = document.querySelectorAll(".star");
+const ratingInput = document.getElementById("rating");
+
+function updateStars(rating) {
+  stars.forEach((star, index) => {
+    star.classList.toggle("active", index < rating);
+  });
+}
+
+stars.forEach((star, index) => {
+  star.addEventListener("click", () => {
+    const ratingValue = index + 1;
+    ratingInput.value = ratingValue;
+    updateStars(ratingValue);
+  });
+
+  star.addEventListener("mouseover", () => {
+    const ratingValue = index + 1;
+    updateStars(ratingValue);
+  });
+
+  star.addEventListener("mouseout", () => {
+    const ratingValue = parseInt(ratingInput.value);
+    updateStars(ratingValue);
+  });
+  });
+});
+</script>
 
 <%- include('../partials/footer') %>
