@@ -175,6 +175,11 @@ flatpickr('#bookingTime', {
   // defaultDate: '12:00', // Set a default time (optional)
 });
 
+flatpickr('#bookingDate', {
+    minDate: 'today', // Set a minimum selectable date of today
+    dateFormat: 'Y-m-d', // Set the date format
+  });
+
 const stars = document.querySelectorAll(".star");
 const ratingInput = document.getElementById("rating");
 
