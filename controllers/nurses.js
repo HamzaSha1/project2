@@ -21,7 +21,7 @@ async function index(req, res) {
 async function nurseDetails(req, res) {
   const nurseId = req.params.id;
   const nurse = await User.findById(nurseId);
-  console.log(`req.user ==> ${JSON.stringify(req.user)}`);
+  // console.log(`req.user ==> ${JSON.stringify(req.user)}`);
   
   res.render(`nurses/details`, {
     title: "Nurse Details",

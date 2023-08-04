@@ -122,7 +122,14 @@
       <div class="col-md-4 mb-4 mb-md-0">
         <div class="card" style="background-color: #f3f2f2;">
           <div class="card-body py-4 mt-2">
-            <div class="d-flex justify-content-center mb-4">
+          <!-- X button for deletion -->
+          <% if(user && user._id.toString() === r.reviewerId.toString()) { %>
+          <form action="/nurses/<%= nurse._id %>/reviews/<%= r._id %>?_method=DELETE" method="POST">
+            <input type="submit" class="btn btn-danger" style="position: absolute; top: 5px; right: 5px;" value="X"></input>
+          </form>
+          <% } %>
+          <!-- Rest of the card content -->
+          <div class="d-flex justify-content-center mb-4">
               <img src="<%= r.reviewerAvatar %>"
                 class="rounded-circle shadow-1-strong" width="100" height="100" />
             </div>
