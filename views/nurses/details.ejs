@@ -50,26 +50,26 @@
     <div class="row my-3">
       <div class="col">
         <label for="bookingNotes" class="fw-bold">Notes</label>
-        <textarea class="form-control" id="bookingNotes" name="bookingNotes" rows="3" placeholder="Notes"></textarea>
+        <textarea class="form-control" id="bookingNotes" name="bookingNotes" rows="3" placeholder="Notes" autocomplete="off"></textarea>
       </div>
     </div>
     <!-- Add address input -->
     <div class="row my-3">
       <div class="col">
         <label for="houseNumber" class="fw-bold">House Number</label>
-        <input type="text" id="houseNumber" name="address.houseNumber" class="form-control" value="<%= user.address.houseNumber %>">
+        <input type="text" id="houseNumber" name="address.houseNumber" class="form-control" value="<%= user.address.houseNumber %>" autocomplete="off">
       </div>
       <div class="col">
         <label for="roadNumber" class="fw-bold">Road Number</label>
-        <input type="text" id="roadNumber" name="address.roadNumber" class="form-control" value="<%= user.address.roadNumber %>">
+        <input type="text" id="roadNumber" name="address.roadNumber" class="form-control" value="<%= user.address.roadNumber %>" autocomplete="off">
       </div>
       <div class="col">
         <label for="blockNumber" class="fw-bold">Block Number</label>
-        <input type="text" id="blockNumber" name="address.blockNumber" class="form-control" value="<%= user.address.blockNumber %>">
+        <input type="text" id="blockNumber" name="address.blockNumber" class="form-control" value="<%= user.address.blockNumber %>" autocomplete="off">
       </div>
       <div class="col">
         <label for="phoneNumber" class="fw-bold">Phone Number</label>
-        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" value="<%= user.phoneNumber %>">
+        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" value="<%= user.phoneNumber %>" autocomplete="off">
       </div>
     </div>
     <div class="text-center">
@@ -91,7 +91,7 @@
     <input type="hidden" name="reviewerRole" value="<%= user.role %>">
 
     <div class="form-group">
-      <textarea class="form-control" name="content" id="content" rows="4" placeholder="Write a Review..."></textarea>
+      <textarea class="form-control" name="content" id="content" rows="4" placeholder="Write a Review..." autocomplete="off"></textarea>
     </div>
 
     <div class="form-group py-2 text-center">
@@ -162,8 +162,6 @@
     </div>
   </div>
 </section>
-
-<script src="../../public/javascripts/details.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
