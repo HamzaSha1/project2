@@ -12,6 +12,7 @@ async function timeslotBooking(req, res) {
   bookingDate = req.body.bookingDate;
   bookingTime = req.body.bookingTime;
   bookingNotes = req.body.bookingNotes;
+  nursePrice = req.body.nursePrice;
   console.log(`customerId ==> ${customerId}`);
   console.log(`nurseId ==> ${nurseId}`);
   console.log(`bookingDate ==> ${bookingDate}`);
@@ -30,6 +31,7 @@ async function timeslotBooking(req, res) {
   const booking = new Booking({
     customerId,
     nurseId,
+    nursePrice,
     bookingDate,
     bookingTime,
     bookingNotes,
