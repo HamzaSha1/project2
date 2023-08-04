@@ -7,68 +7,55 @@ module.exports = {
 };
 
 async function timeslotBooking(req, res) {
-  customerId = req.user._id;
-  nurseId = req.params.id;
-  bookingDate = req.body.bookingDate;
-  bookingTime = req.body.bookingTime;
-  bookingNotes = req.body.bookingNotes;
-  nursePrice = req.body.nursePrice;
-  console.log(`customerId ==> ${customerId}`);
-  console.log(`nurseId ==> ${nurseId}`);
-  console.log(`bookingDate ==> ${bookingDate}`);
-  console.log(`bookingTime ==> ${bookingTime}`);
-  console.log(`bookingNotes ==> ${bookingNotes}`);
+  const customerId = req.user._id;
+  const nurseId = req.params.id;
+  const bookingDate = req.body.bookingDate;
+  const bookingTime = req.body.bookingTime;
+  const bookingNotes = req.body.bookingNotes;
 
   // Add the booking to the user
   const nurse = await User.findById(nurseId);
   const customer = await User.findById(customerId);
 
-  nurseName = nurse.name;
-  nurseEmail = nurse.email;
-  customerName = customer.name;
-  customerEmail = customer.email;
+  const nurseName = nurse.name;
+  const nurseEmail = nurse.email;
+  const nursePrice = nurse.price;
+  const customerName = customer.name;
+  const customerEmail = customer.email;
 
   const booking = new Booking({
     customerId,
     nurseId,
-    nursePrice,
     bookingDate,
     bookingTime,
     bookingNotes,
     nurseName,
     nurseEmail,
+    nursePrice,
     customerName,
-    customerEmail,
+    customerEmail
   });
 
   await booking.save();
 
   try {
-    const nurse = await User.findById(nurseId);
-    const customer = await User.findById(customerId);
     if (!nurse || !customer) {
       return res.status(404).json({
         success: false,
         message: "User not found.",
       });
     }
-
+    
+    // saved the booking to the nurse 
     nurse.booking.push(booking);
     await nurse.save();
 
-    // saved the booking to the customer as well
+    // saved the booking to the customer 
     customer.booking.push(booking);
     await customer.save();
 
-    res.redirect(`/nurses`);
+    res.redirect(`/nurses/details/${nurseId}`);
 
-    // Add booking to customer object
-
-    // Add booking to nurse object
-
-    // Save the updated customer object
-
-    // Save the updated nurse object
   } catch (error) {
     res.status(500).json({
       success: false,

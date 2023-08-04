@@ -5,14 +5,14 @@ const bookingSchema = new Schema(
   {
     customerId: String,
     nurseId: String,
-    nursePrice: Number,
     bookingDate: Date,
     bookingTime: String,
     bookingNotes: String,
     nurseName: String,
-    customerName: String,
     nurseEmail: String,
-    customerEmail: String,
+    nursePrice: Number,
+    customerName: String,
+    customerEmail: String
   },
   {
     timestamps: true,
