@@ -12,7 +12,10 @@ const bookingSchema = new Schema(
     nurseEmail: String,
     nursePrice: Number,
     customerName: String,
-    customerEmail: String
+    customerEmail: String,
+    customerHouse: Number,
+    customerBlock: Number,
+    customerRoad: Number,
   },
   {
     timestamps: true,

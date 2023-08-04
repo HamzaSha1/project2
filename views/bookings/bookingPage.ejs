@@ -9,6 +9,9 @@
             <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
             <p><%= r.bookingTime %></p>
             <p><%= r.bookingNotes %></p>
+            <p><%= r.customerHouse %></p>
+            <p><%= r.customerBlock %></p>
+            <p><%= r.customerRoad %></p>
         <% } %>
     <% }); %>
 <% } else if(user.role === 'Customer') { %>
