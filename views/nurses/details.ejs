@@ -37,7 +37,6 @@
   <form action="/bookings/<%= nurse._id %>" method="POST">
     <input type="hidden" name="nurseId" value="<%= nurse._id %>">
     <input type="hidden" name="customerId" value="<%= user?._id %>">
-    <input type="hidden" name="nursePrice" value="<%= nurse.price %>">
     <div class="row my-3">
       <div class="col">
         <label for="bookingDate" class="fw-bold">Date</label>
@@ -175,6 +174,11 @@ flatpickr('#bookingTime', {
   minuteIncrement: 30, // Show only 00 and 30 as options for minutes
   // defaultDate: '12:00', // Set a default time (optional)
 });
+
+flatpickr('#bookingDate', {
+    minDate: 'today', // Set a minimum selectable date of today
+    dateFormat: 'Y-m-d', // Set the date format
+  });
 
 const stars = document.querySelectorAll(".star");
 const ratingInput = document.getElementById("rating");

@@ -3,23 +3,41 @@
 <% if(user.role === "Nurse") { %>
     <% user.booking.forEach(function(r) { %>
         <% if(user?._id.toString() === r.nurseId.toString()) { %>
-            <p><%= r.customerName %></p>
-            <p><%= r.customerEmail %></p>
-            <p><%= r.nursePrice %></p>
-            <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
-            <p><%= r.bookingTime %></p>
-            <p><%= r.bookingNotes %></p>
+            <section id="show-page">
+                <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
+                    <div class="card p-4"> 
+                    <span class="name mt-3"><%= r.customerName %></span> <br>
+                    <span class="idd"><%= r.customerEmail %></span> <br>
+                    <span class="idd"><%= r.nursePrice %></span> <br>
+                    <span class="idd"><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></span> <br>
+                    <span class="idd"><%= r.bookingTime %></span> <br>
+                    <span class="idd"><%= r.customerHouse %></span> <br>
+                    <span class="idd"><%= r.customerBlock %></span> <br>
+                    <span class="idd"><%= r.customerRoad %></span> <br>
+                    <span class="text mt-3"><%= r.bookingNotes %></span> <br>
+                    <div 
+                    class="d-flex flex-row justify-content-center align-items-center gap-2"> 
+                    </div>
+                </div> 
+            </div>
+            </section>
         <% } %>
     <% }); %>
 <% } else if(user.role === 'Customer') { %>
     <% user.booking.forEach(function(r) { %>
         <% if(user?._id.toString() === r.customerId.toString()) { %>
-            <p><%= r.nurseName %></p>
-            <p><%= r.nurseEmail %></p>
-            <p><%= r.nursePrice %></p>
-            <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
-            <p><%= r.bookingTime %></p>
-            <p><%= r.bookingNotes %></p>
+            <section id="show-page">
+                <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> <div class="card p-4"> 
+                    <span class="name mt-3">Nurse:<%= r.nurseName %></span> <br>
+                    <span class="idd"><%= r.nurseEmail %></span> <br>
+                    <span class="idd">BHD<%= r.nursePrice %></span> <br>
+                    <span class="idd"><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></span> <br>
+                    <span class="idd"><%= r.bookingTime %></span> <br>
+                    <span class="text mt-3">Notes: <%= r.bookingNotes %></span> 
+                    <div class="d-flex flex-row justify-content-center align-items-center gap-2"> 
+                    </div></div> </div>
+                      </div>
+            </section>
         <% } %>
     <% }); %>
 <% } %>

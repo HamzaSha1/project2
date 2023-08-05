@@ -1,5 +1,4 @@
 <%- include('../partials/header') %>
-
 <% if(user.role === "Nurse") { %>
   <form id="new-nurse" action="/users/<%= user._id %>?_method=PUT" method="POST">
     <div>
