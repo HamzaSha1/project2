@@ -790,3 +790,8 @@ hr .new1 {
 .date {
   background-color: #ccc;
 }
+
+.bookingPage {
+  padding-left: 30px;
+  padding-right: 30px;
+}
