@@ -2,36 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title><%= title %></title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="/img/favicon.png" rel="icon">
+    <link href="/img/favicon.png" rel="apple-touch-icon">
+
+    
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
   integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
   <script src="https://kit.fontawesome.com/47bb336793.js" crossorigin="anonymous"></script>
   <link rel='stylesheet' href='/stylesheets/style.css'>
+  
 </head>
 
-<body class="p-0">
-  <div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-      <a class="bi me-2 link-dark fw-bold text-decoration-none" href="/">Nurse Appointment Booking <i class="fa-solid fa-user-nurse"></i></a>
 
-      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
-        <li><a href="/nurses/" class="nav-link px-2 link-dark">Find a Nurse</a></li>
-        <li><a href="/users/<%= user?._id %>" class="nav-link px-2 link-dark">Profile</a></li>
-      </ul>
+<body>
 
-      <div class="col-md-3 text-end">
-        <div class="my-auto col-md-3 ms-auto">
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center">
+    <div class="container d-flex justify-content-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope"></i> <a href="mailto:contact@EasyNurse.com">contact@EasyNurse.com</a>
+        <i class="bi bi-phone"></i> +97333838373
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container d-flex align-items-center">
+      <a class="logo me-auto"><img src="/img/favicon.png" alt="" class="img-fluid"></a>
+      <h1 class="logo me-auto">EasyNurse: Book your nurse now</h1>
+      
+  
+      <i class="bi bi-list mobile-nav-toggle d-md-none"></i> <!-- Mobile nav toggle button for small screens -->
+  
+      <nav id="navbar" class="navbar order-last order-lg-0 flex-grow-1"> <!-- Added flex-grow-1 to make the navbar expand to fill available space -->
+        <ul class="d-flex flex-wrap flex-md-nowrap"> <!-- Added flex-wrap to allow the list items to wrap on smaller screens -->
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/nurses/">Find a Nurse</a></li>
+          <% if(user) { %>
+            <li class="nav-item"><a href="/bookings/<%= user?._id %>" class="nav-link">Bookings <%= user.booking.length ? '(' + user.booking.length + ')' : '' %></a></li>
+          <% } %>
+          <% if(user) { %>
+            <li class="nav-item"><a href="/users/<%= user?._id %>" class="nav-link">Profile</a></li>
+          <% } %>
+        </ul>
+      </nav><!-- .navbar -->
+  
+      <div class="col-md-2 text-end">
+        <div class="my-auto col-md-6 ms-auto">
           <% if (user) { %>
-            <a href="/logout" type="button" class="btn btn-outline-danger me-2">Logout</a>
+            <a href="/logout" type="button" class="btn btn-primary scrollto d-none d-md-inline"><span>Logout</span></a>
           <% } else { %>
-            <a href="/auth/google" type="button" class="login btn btn-outline-secondary">Login&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+            <a href="/auth/google" type="button" class="btn btn-primary scrollto d-none d-md-inline"><span>Login</span></a>
           <% } %>
         </div>
       </div>
-    </header>
-  </div>
-  <main>
-    <div class="container">
-    <h2 class="text-center"><%= title %></h2>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->

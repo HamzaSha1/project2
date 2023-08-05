@@ -21,15 +21,16 @@ var passport = require("passport");
 const indexRouter = require("./routes/index");
 const nurseRouter = require("./routes/nurses");
 const usersRouter = require("./routes/users");
-const reviewsRouter = require('./routes/reviews');
+const reviewsRouter = require("./routes/reviews");
 // var clientRouter = require("./routes/clients");
+const bookingsRouter = require("./routes/bookings");
+const aboutsRoute = require('./routes/abouts');
 
 var app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -56,11 +57,13 @@ app.use(function (req, res, next) {
   next();
 });
 
-app.use(methodOverride('_method'));
+app.use(methodOverride("_method"));
 app.use("/", indexRouter);
 app.use("/nurses", nurseRouter);
 app.use("/users", usersRouter);
-app.use('/', reviewsRouter);
+app.use("/bookings", bookingsRouter);
+app.use("/", reviewsRouter);
+app.use('/about', aboutsRoute);
 // app.use("/clients", clientRouter);
 
 // catch 404 and forward to error handler

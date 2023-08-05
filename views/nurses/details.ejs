@@ -1,94 +1,213 @@
 <%- include('../partials/header') %>
-
-<form>
+<div class="bookingPage">
   <form>
     <fieldset disabled>
       <div class="row my-3">
         <hr>
         <div class="col">
-          <label for="nurseName">Nurse Name</label>
+          <label for="nurseName" class="fw-bold">Nurse Name</label>
           <input type="text" id="nurseName" class="form-control" placeholder="<%= nurse.name %>">
         </div>
         <div class="col">
-          <label for="nursePrice">Price</label>
+          <label for="nursePrice" class="fw-bold">Consultation Price</label>
           <input type="text" id="nursePrice" class="form-control" placeholder="<%= nurse.price %> BD">
         </div>
       </div>
     </fieldset>
   </form>
 
-  <h3><%= user?._id %></h3>
-
-
-
   <% let total = 0 %>
   <% nurse.reviews.forEach(function(r) { %> <% total += r.starRating %> <% }); %>
 
-  <h4>Qualifications:</h4>
+  <h5 class="fw-bold">Qualifications</h5>
   <hr>
   <ul>
     <li><%= nurse.qualifications %></li>
   </ul>
 
-  <h4>Education:</h4>
+  <h5 class="fw-bold">Education</h5>
   <hr>
   <ul>
     <li><%= nurse.education %></li>
   </ul>
 
-  <h4>Reviews:</h4>
+  <% if(user && user._id.toString() !== nurse._id.toString()) { %>
+  <h5 class="fw-bold">Booking</h5>
   <hr>
-  <% if (user) { %>
+  <form action="/bookings/<%= nurse._id %>" method="POST">
+    <input type="hidden" name="nurseId" value="<%= nurse._id %>">
+    <input type="hidden" name="customerId" value="<%= user?._id %>">
+    <div class="row my-3">
+      <div class="col">
+        <label for="bookingDate" class="fw-bold">Date</label>
+        <input type="date" id="bookingDate" name="bookingDate" class="form-control" placeholder="Date">
+      </div>
+      <div class="col">
+        <label for="bookingTime" class="fw-bold">Time</label>
+        <input type="text" id="bookingTime" name="bookingTime" class="form-control" placeholder="12:00 PM">
+      </div>
+    </div>
+    <div class="row my-3">
+      <div class="col">
+        <label for="bookingNotes" class="fw-bold">Notes</label>
+        <textarea class="form-control" id="bookingNotes" name="bookingNotes" rows="3" placeholder="Notes" autocomplete="off"></textarea>
+      </div>
+    </div>
+    <!-- Add address input -->
+    <div class="row my-3">
+      <div class="col">
+        <label for="houseNumber" class="fw-bold">House Number</label>
+        <input type="text" id="houseNumber" name="address.houseNumber" class="form-control" value="<%= user.address.houseNumber %>" autocomplete="off">
+      </div>
+      <div class="col">
+        <label for="roadNumber" class="fw-bold">Road Number</label>
+        <input type="text" id="roadNumber" name="address.roadNumber" class="form-control" value="<%= user.address.roadNumber %>" autocomplete="off">
+      </div>
+      <div class="col">
+        <label for="blockNumber" class="fw-bold">Block Number</label>
+        <input type="text" id="blockNumber" name="address.blockNumber" class="form-control" value="<%= user.address.blockNumber %>" autocomplete="off">
+      </div>
+      <div class="col">
+        <label for="phoneNumber" class="fw-bold">Phone Number</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" value="<%= user.phoneNumber %>" autocomplete="off">
+      </div>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary my-2" type="submit">Book Now</button>
+    </div>
+  </form>
+  <% } else if (!user) { %>
+    <!-- If the user is not logged in, show a message to prompt them to log in -->
+    <p>Please <a href="/auth/google">log in</a> to book an appointment.</p>
+  <% } %>
+
+  <h5 class="fw-bold">Reviews</h5>
+  <hr>
+  <% if (user && user?._id.toString() !== nurse._id.toString()) { %>
   <form id="add-review-form" method="POST" action="/nurses/<%= nurse._id %>/reviews">
     <input type="hidden" name="reviewerId" value="<%= user?._id %>">
     <input type="hidden" name="reviewerName" value="<%= user.name %>">
     <input type="hidden" name="reviewerAvatar" value="<%= user.avatar %>">
-    <label>Review:</label>
-    <textarea name="content"></textarea>
-    <label>Rating:</label>
-    <select name="rating">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5" selected>5</option>
-    </select>
-    <input type="submit" value="Add Review">
+    <input type="hidden" name="reviewerRole" value="<%= user.role %>">
+
+    <div class="form-group">
+      <textarea class="form-control" name="content" id="content" rows="4" placeholder="Write a Review..." autocomplete="off"></textarea>
+    </div>
+
+    <div class="form-group py-2 text-center">
+      <div class="rating-stars">
+        <i class="fas fa-star star" data-rating="1"></i>
+        <i class="fas fa-star star" data-rating="2"></i>
+        <i class="fas fa-star star" data-rating="3"></i>
+        <i class="fas fa-star star" data-rating="4"></i>
+        <i class="fas fa-star star" data-rating="5"></i>
+      </div>
+
+      <input type="hidden" name="rating" id="rating">
+    </div>
+
+    <div class="text-center">
+      <button class="btn btn-success my-2" type="submit">Add Review</button>
+    </div>
+
   </form>
+  <% } else if (!user) { %>
+    <!-- If the user is not logged in, show a message to prompt them to log in -->
+    <p>Please <a href="/auth/google">log in</a> to leave a review.</p>
   <% } %>
 
   <% if (nurse.reviews.length) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Date</th>
-          <th>Review</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% let total = 0 %>
-        <% nurse.reviews.forEach(function(r) { %>
-          <% total += r.rating %>
-          <tr>
-            <td class="review-user"><img alt="avatar" src="<%= r.reviewerAvatar %>" referrerpolicy="no-referrer" ><%= r.reviewerName %></td>
-            <td><%= r.createdAt.toLocaleDateString() %></td>
-            <td><%= r.content %></td>
-            <td><%= r.rating %></td>
-          </tr>
-        <% }); %>
-        <tr>
-          <td colspan="3"></td>
-          <td><strong><%= (total / nurse.reviews.length).toFixed(1) %></strong></td>
-        </tr>
-      </tbody>
-    </table>  
-  <% } else { %>
-    <h5>No Reviews Yet</h5>
-  <% } %>
+  <section style="color: #000; ">
+  <div class="container py-3">
 
+    <div class="row text-center">
+    <% let total = 0 %>
+    <% nurse.reviews.forEach(function(r) { %>
+    <% total += r.rating %>
+      <div class="col-md-4 mb-4 mb-md-0">
+        <div class="card" style="background-color: #f3f2f2;">
+          <div class="card-body py-4 mt-2">
+          <!-- X button for deletion -->
+          <% if(user && user._id.toString() === r.reviewerId.toString()) { %>
+          <form action="/nurses/<%= nurse._id %>/reviews/<%= r._id %>?_method=DELETE" method="POST">
+            <input type="submit" class="btn btn-danger" style="position: absolute; top: 5px; right: 5px;" value="X"></input>
+          </form>
+          <% } %>
+          <!-- Rest of the card content -->
+          <div class="d-flex justify-content-center mb-4">
+              <img src="<%= r.reviewerAvatar %>"
+                class="rounded-circle shadow-1-strong" width="100" height="100" />
+            </div>
+            <h5 class="font-weight-bold"><%= r.reviewerName %></h5>
+            <h6 class="font-weight-bold fst-italic my-3"><%= r.reviewerRole %></h6>
+            <ul class="list-unstyled d-flex justify-content-center">
+              <% for (let i = 1; i <= 5; i++) { %>
+                <% if (r.rating >= i) { %>
+                  <i class="fas fa-star"></i>
+                <% } else { %>
+                  <i class="far fa-star"></i>
+                <% } %>
+              <% } %>
+            </ul>
+            <p class="mb-2">
+              <i class="fas fa-quote-left pe-2"></i><%= r.content %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+    <% } else { %>
+      <h5 class="text-center">No Reviews Yet</h5>
+    <% } %>
+    </div>
+  </div>
+</section>
 
-  
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+flatpickr('#bookingTime', {
+  enableTime: true,  // Enable time selection
+  noCalendar: true,  // Hide the calendar
+  time_24hr: false,  // Switch to 12-hour time mode
+  dateFormat: 'h:i K', // Format to display in 12-hour format with AM/PM
+  minuteIncrement: 30, // Show only 00 and 30 as options for minutes
+  // defaultDate: '12:00', // Set a default time (optional)
+});
+
+flatpickr('#bookingDate', {
+    minDate: 'today', // Set a minimum selectable date of today
+    dateFormat: 'Y-m-d', // Set the date format
+  });
+
+const stars = document.querySelectorAll(".star");
+const ratingInput = document.getElementById("rating");
+
+function updateStars(rating) {
+  stars.forEach((star, index) => {
+    star.classList.toggle("active", index < rating);
+  });
+}
+
+stars.forEach((star, index) => {
+  star.addEventListener("click", () => {
+    const ratingValue = index + 1;
+    ratingInput.value = ratingValue;
+    updateStars(ratingValue);
+  });
+
+  star.addEventListener("mouseover", () => {
+    const ratingValue = index + 1;
+    updateStars(ratingValue);
+  });
+
+  star.addEventListener("mouseout", () => {
+    const ratingValue = parseInt(ratingInput.value);
+    updateStars(ratingValue);
+  });
+  });
+});
+</script>
+</div>
 
 <%- include('../partials/footer') %>

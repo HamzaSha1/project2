@@ -10,12 +10,6 @@ const nursesCtrl = require("../controllers/nurses");
 // /nurses/whatever
 
 router.get("/", nursesCtrl.index);
-// router.get("/booking/:id", nursesCtrl.bookingPage);
-router.get("/details/:id", nursesCtrl.nurseDetails);
-router.get('/:id/edit', nursesCtrl.edit);
-router.put('/:id', nursesCtrl.update);
-router.get('/:id', nursesCtrl.show);
+router.get("/details/:id", nursesCtrl.show);
 
 module.exports = router;
-
-

@@ -15,7 +15,7 @@ async function edit(req, res) {
   res.render("users/details", {
     // GET the todo
     user,
-    title: "Nurse- edit",
+    title: "Update User Profile",
   });
 }
 // Put call to update a single todo item
@@ -39,7 +39,7 @@ async function show(req, res) {
   // if user.role !== "Customer"
 
   //if user is a nurse then render nurse show page
-  res.render("users/show", { title: "Show User", user: nurse });
+  res.render("users/show", { title: "User Profile", user: nurse });
 
   // TODO if not a nurse do this
 }
