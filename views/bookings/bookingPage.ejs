@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
 
 <% if(user.role === "Nurse") { %>
-    <% user.booking.forEach(function(r) { %>
+    <% nurseBooking.forEach(function(r) { %>
         <% if(user?._id.toString() === r.nurseId.toString()) { %>
             <p><%= r.customerName %></p>
             <p><%= r.customerEmail %></p>
@@ -15,7 +15,7 @@
         <% } %>
     <% }); %>
 <% } else if(user.role === 'Customer') { %>
-    <% user.booking.forEach(function(r) { %>
+    <% customerBooking.forEach(function(r) { %>
         <% if(user?._id.toString() === r.customerId.toString()) { %>
             <p><%= r.nurseName %></p>
             <p><%= r.nurseEmail %></p>
