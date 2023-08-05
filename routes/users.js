@@ -1,13 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const usersCtrl = require("../controllers/users");
+const isAuthorized = require("../config/isAuthorized");
 
-router.get("/:id/edit", usersCtrl.edit);
+router.get("/:id/edit", isAuthorized, usersCtrl.edit);
 
-router.put("/:id", usersCtrl.update);
+router.put("/:id", isAuthorized, usersCtrl.update);
 
-router.get("/:id", usersCtrl.show);
+router.get("/:id", isAuthorized, usersCtrl.show);
 
-router.delete("/:id", usersCtrl.delete);
+router.delete("/:id", isAuthorized, usersCtrl.delete);
 
 module.exports = router;
