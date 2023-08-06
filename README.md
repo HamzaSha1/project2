@@ -47,8 +47,7 @@ This project make it effortless for patients to find and book appointments with 
 
 - Add animations to enhance the user experience.
 - Allows users to search for nurses based on their location or their expertise.
-- Allows users to filter nurses based on their availability.
-- Allows users to filter nurses based on their ratings.
+- Allows users to filter nurses based on their availability and ratings.
 
 ## Screenshots
 ![Screenshot 1](images/screenshot1.png)
