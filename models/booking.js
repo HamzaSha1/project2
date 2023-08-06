@@ -16,6 +16,7 @@ const bookingSchema = new Schema(
     customerHouse: Number,
     customerBlock: Number,
     customerRoad: Number,
+    phoneNumber: Number,
     status: {
       type: String,
       enum: ["Pending", "Approved", "Declined"],

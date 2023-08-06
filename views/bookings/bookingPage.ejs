@@ -10,11 +10,31 @@
                     <div class="alert alert-warning" style="position: absolute; top: 5px; right: 5px;" role="alert">
                         Pending
                     </div>
-                  <h5 class="card-title"><%= r.customerName %></h5>
+                    <form>
+                        <fieldset disabled>
+                          <div class="row my-3">
+                            <div class="col">
+                              <label for="nurseName" class="fw-bold">Customer Name</label>
+                              <input type="text" id="nurseName" class="form-control" placeholder="<%= r.customerName %>">
+                            </div>
+                            <div class="col">
+                              <label for="nursePrice" class="fw-bold">Consultation Price</label>
+                              <input type="text" id="nursePrice" class="form-control" placeholder="<%= r.nursePrice %> BD">
+                            </div>
+                          </div>
+                          <div class="row my-3">
+                            <div class="col">
+                              <label for="nurseName" class="fw-bold">Date</label>
+                              <input type="text" id="nurseName" class="form-control" placeholder="<%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %>">
+                            </div>
+                            <div class="col">
+                              <label for="nursePrice" class="fw-bold">Time</label>
+                              <input type="text" id="nursePrice" class="form-control" placeholder="<%= r.bookingTime %>">
+                            </div>
+                          </div>
+                        </fieldset>
+                      </form>
                   <p class="card-text"><%= r.customerEmail %></p>
-                  <p class="card-text"><%= r.nursePrice %></p>
-                  <p class="card-text"><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
-                  <p class="card-text"><%= r.bookingTime %></p>
                   <p class="card-text"><%= r.bookingNotes %></p>
                   <p class="card-text"><%= r.customerHouse %></p>
                   <p class="card-text"><%= r.customerBlock %></p>
@@ -37,6 +57,9 @@
     <% approvedBooking.forEach(function(r) { %>
         <div class="card mb-3">
             <div class="card-body">
+                <div class="alert alert-success" style="position: absolute; top: 5px; right: 5px;" role="alert">
+                    Approved
+                </div>
               <h5 class="card-title"><%= r.customerName %></h5>
               <p class="card-text"><%= r.customerEmail %></p>
               <p class="card-text"><%= r.nursePrice %></p>
@@ -59,6 +82,9 @@
     <% declinedBooking.forEach(function(r) { %>
         <div class="card mb-3">
             <div class="card-body">
+                <div class="alert alert-danger" style="position: absolute; top: 5px; right: 5px;" role="alert">
+                    Declined
+                </div>
               <h5 class="card-title"><%= r.customerName %></h5>
               <p class="card-text"><%= r.customerEmail %></p>
               <p class="card-text"><%= r.nursePrice %></p>
