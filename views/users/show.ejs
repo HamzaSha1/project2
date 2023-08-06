@@ -1,41 +1,60 @@
 <%- include('../partials/header') %>
-
-<% if(user.role === "Nurse") { %>
-
-<section id="show-page">
-<div>Nurse Name: </div>
-<div><%= user.name %></div>
-<div>email Address: </div>
-<div><%= user.email %></div>
-<div>Qualifications: </div>
-<div><%= user.qualifications %></div>
-<div>Education: </div>
-<div><%= user.education %></div>
-<div>Price: </div>
-<div>$<%= user.price %></div>
-
-</section>
-
-<% } else if(user.role === 'Customer') { %> 
-
-<section id="show-page">
-<div>Nurse Name: </div>
-<div><%= user.name %></div>
-<div>email Address: </div>
-<div><%= user.email %></div>
-<div>Phone Number: </div>
-<div><%= user.phoneNumber %></div>
-<div>House Number: </div>
-<div><%= user.address.houseNumber %></div>
-<div>Block: </div>
-<div><%= user.address.blockNumber %></div>
-<div>Road Number: </div>
-<div><%= user.address.roadNumber %></div>
-</section>
-<% } %>
-<div><a href="/users/<%= user._id %>/edit">Edit Details</a></div>
-<div><form action="/users/<%= user._id %>?_method=DELETE" method="POST">
-    <input type="submit" name="" id="" value="Delete account">
-</form>
+<div class="bookingBackground">
+  <% if(user.role === "Nurse") { %>
+  <section id="show-page" class="mt-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card p-4">
+            <div class="text-center">
+              <img src="<%= user.avatar %>" class="rounded-circle" height="100" width="100" alt="Avatar">
+            </div>
+            <h5 class="text-center mt-3"><%= user.name %></h5>
+            <p class="text-center"><%= user.email %></p>
+            <div class="text-center mt-3">
+              <p>Qualifications: <%= user.qualifications %></p>
+              <p>Education: <%= user.education %></p>
+              <p>Price: <%= user.price %> BD</p>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <a href="/users/<%= user._id %>/edit" class="btn btn-primary me-2">Edit Profile</a>
+              <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
+                <input type="submit" class="btn btn-danger" value="Delete Account">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <% } else if(user.role === 'Customer') { %> 
+  <section id="show-page" class="mt-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card p-4">
+            <div class="text-center">
+              <img src="<%= user.avatar %>" class="rounded-circle" height="100" width="100" alt="Avatar">
+            </div>
+            <h5 class="text-center mt-3"><%= user.name %></h5>
+            <p class="text-center"><%= user.email %></p>
+            <div class="text-center mt-3">
+              <p>Phone: <%= user.phoneNumber %></p>
+              <p>House Number: <%= user.address.houseNumber %></p>
+              <p>Block: <%= user.address.blockNumber %></p>
+              <p>Road Number: <%= user.address.roadNumber %></p>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+              <a href="/users/<%= user._id %>/edit" class="btn btn-primary me-2">Edit Profile</a>
+              <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
+                <input type="submit" class="btn btn-danger" value="Delete Account">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <% } %>
 </div>
 <%- include('../partials/footer') %>

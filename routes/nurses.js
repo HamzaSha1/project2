@@ -13,5 +13,3 @@ router.get("/", nursesCtrl.index);
 router.get("/details/:id", nursesCtrl.show);
 
 module.exports = router;
-
-
