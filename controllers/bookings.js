@@ -13,6 +13,9 @@ async function timeslotBooking(req, res) {
   const bookingDate = req.body.bookingDate;
   const bookingTime = req.body.bookingTime;
   const bookingNotes = req.body.bookingNotes;
+  const customerHouse = req.body.customerHouse;
+  const customerBlock = req.body.customerBlock;
+  const customerRoad = req.body.customerRoad;
 
   // Add the booking to the user
   const nurse = await User.findById(nurseId);
@@ -23,9 +26,9 @@ async function timeslotBooking(req, res) {
   const nursePrice = nurse.price;
   const customerName = customer.name;
   const customerEmail = customer.email;
-  const customerHouse = customer.address.houseNumber;
-  const customerBlock = customer.address.blockNumber;
-  const customerRoad = customer.address.roadNumber;
+  // const customerHouse = customer.address.houseNumber;
+  // const customerBlock = customer.address.blockNumber;
+  // const customerRoad = customer.address.roadNumber;
 
   const booking = new Booking({
     customerId,

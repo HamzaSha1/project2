@@ -7,6 +7,9 @@
         <% pendingBooking.forEach(function(r) { %>
             <div class="card mb-3">
                 <div class="card-body">
+                    <div class="alert alert-warning" style="position: absolute; top: 5px; right: 5px;" role="alert">
+                        Pending
+                    </div>
                   <h5 class="card-title"><%= r.customerName %></h5>
                   <p class="card-text"><%= r.customerEmail %></p>
                   <p class="card-text"><%= r.nursePrice %></p>
