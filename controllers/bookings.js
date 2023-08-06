@@ -73,12 +73,29 @@ async function timeslotBooking(req, res) {
 async function showBookedSessions(req, res) {
   const user = await User.findById(req.params.id).populate("booking");
   const customerBooking = await Booking.find({ customerId: req.params.id });
-  const nurseBooking = await Booking.find({ nurseId: req.params.id });
+  // const nurseBooking = await Booking.find({ nurseId: req.params.id });
+  // filter pending bookings
+  const pendingBooking = await Booking.find({
+    nurseId: req.params.id,
+    status: "Pending",
+  });
+  // filter approved bookings
+  const approvedBooking = await Booking.find({
+    nurseId: req.params.id,
+    status: "Approved",
+  });
+  // filter declined bookings
+  const declinedBooking = await Booking.find({
+    nurseId: req.params.id,
+    status: "Declined",
+  });
   res.render(`bookings/bookingPage`, {
     title: "Booking Page",
     user,
     customerBooking,
-    nurseBooking,
+    pendingBooking,
+    approvedBooking,
+    declinedBooking
   });
 }
 
@@ -86,5 +103,5 @@ async function updateStatus(req, res) {
   const bookingId = req.params.id;
   const bookingStatus = req.body.status;
   await Booking.updateOne({ _id: bookingId }, { status: bookingStatus });
-  showBookedSessions(req, res);
+  res.redirect(`/`);
 }

@@ -3,30 +3,30 @@
 <% if(user.role === "Nurse") { %>
   <h4>Pending</h4>
   <hr>
-    <% nurseBooking.forEach(function(r) { %>
-      <% if(r.status === 'Pending') { %>
-        <p><%= r.customerName %></p>
-        <p><%= r.customerEmail %></p>
-        <p><%= r.nursePrice %></p>
-        <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
-        <p><%= r.bookingTime %></p>
-        <p><%= r.bookingNotes %></p>
-        <p><%= r.customerHouse %></p>
-        <p><%= r.customerBlock %></p>
-        <p><%= r.customerRoad %></p>
-        <form action="/bookings/<%= r._id %>?_method=PUT" method="POST">
-            <button type="submit" class="btn btn-success" name="status" value="Approved">Accept</button>
-            <button type="submit" class="btn btn-danger" name="status" value="Declined">Decline</button>
-        </form>
-        <% } else if(r.status != 'Pending') { %>
-            <p>No pending bookings</p>
-        <% } %>
-    <% }); %>
+    <% if(pendingBooking.length) { %>
+        <% pendingBooking.forEach(function(r) { %>
+            <p><%= r.customerName %></p>
+            <p><%= r.customerEmail %></p>
+            <p><%= r.nursePrice %></p>
+            <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
+            <p><%= r.bookingTime %></p>
+            <p><%= r.bookingNotes %></p>
+            <p><%= r.customerHouse %></p>
+            <p><%= r.customerBlock %></p>
+            <p><%= r.customerRoad %></p>
+            <form action="/bookings/<%= r._id %>?_method=PUT" method="POST">
+                <button type="submit" class="btn btn-success" name="status" value="Approved">Accept</button>
+                <button type="submit" class="btn btn-danger" name="status" value="Declined">Decline</button>
+            </form>
+        <% }); %>
+    <% } else { %>
+        <p>No pending bookings</p>
+    <% } %>
 
   <h4>Approved</h4>
   <hr>
-    <% nurseBooking.forEach(function(r) { %>
-      <% if(r.status === 'Approved') { %>
+  <% if(approvedBooking.length) { %>
+    <% approvedBooking.forEach(function(r) { %>
         <p><%= r.customerName %></p>
         <p><%= r.customerEmail %></p>
         <p><%= r.nursePrice %></p>
@@ -36,15 +36,15 @@
         <p><%= r.customerHouse %></p>
         <p><%= r.customerBlock %></p>
         <p><%= r.customerRoad %></p>
-      <% } else { %>
-        <p>No approved bookings</p>
-      <% } %>
     <% }); %>
+    <% } else { %>
+        <p>No approved bookings</p>
+    <% } %>
 
   <h4>Declined</h4>
   <hr>
-    <% nurseBooking.forEach(function(r) { %>
-      <% if(r.status === 'Declined') { %>
+  <% if(declinedBooking.length) { %>
+    <% declinedBooking.forEach(function(r) { %>
         <p><%= r.customerName %></p>
         <p><%= r.customerEmail %></p>
         <p><%= r.nursePrice %></p>
@@ -54,16 +54,17 @@
         <p><%= r.customerHouse %></p>
         <p><%= r.customerBlock %></p>
         <p><%= r.customerRoad %></p>
-        <% } else { %>
-            <p>No declined bookings</p>
-        <% } %>
     <% }); %>
+    <% } else { %>
+        <p>No declined bookings</p>
+    <% } %>
+
 <% } else if(user.role === 'Customer') { %>
+    
   <h4>My Bookings</h4>
   <hr>
     <% customerBooking.forEach(function(r) { %>
       <% if(user?._id.toString() === r.customerId.toString()) { %>
-
             <p><%= r.nurseName %></p>
             <p><%= r.nurseEmail %></p>
             <p><%= r.nursePrice %></p>
@@ -72,6 +73,7 @@
             <p><%= r.bookingNotes %></p>
       <% } %>
     <% }); %>
+
 <% } %>
 
 <%- include('../partials/footer') %>
