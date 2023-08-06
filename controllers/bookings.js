@@ -102,6 +102,7 @@ async function showBookedSessions(req, res) {
 async function updateStatus(req, res) {
   const bookingId = req.params.id;
   const bookingStatus = req.body.status;
+  const nurseId = req.body.nurseId;
   await Booking.updateOne({ _id: bookingId }, { status: bookingStatus });
-  res.redirect(`/`);
+  res.redirect(`/bookings/${nurseId}`);
 }

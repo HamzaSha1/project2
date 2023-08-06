@@ -5,19 +5,24 @@
   <hr>
     <% if(pendingBooking.length) { %>
         <% pendingBooking.forEach(function(r) { %>
-            <p><%= r.customerName %></p>
-            <p><%= r.customerEmail %></p>
-            <p><%= r.nursePrice %></p>
-            <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
-            <p><%= r.bookingTime %></p>
-            <p><%= r.bookingNotes %></p>
-            <p><%= r.customerHouse %></p>
-            <p><%= r.customerBlock %></p>
-            <p><%= r.customerRoad %></p>
-            <form action="/bookings/<%= r._id %>?_method=PUT" method="POST">
-                <button type="submit" class="btn btn-success" name="status" value="Approved">Accept</button>
-                <button type="submit" class="btn btn-danger" name="status" value="Declined">Decline</button>
-            </form>
+            <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title"><%= r.customerName %></h5>
+                  <p class="card-text"><%= r.customerEmail %></p>
+                  <p class="card-text"><%= r.nursePrice %></p>
+                  <p class="card-text"><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
+                  <p class="card-text"><%= r.bookingTime %></p>
+                  <p class="card-text"><%= r.bookingNotes %></p>
+                  <p class="card-text"><%= r.customerHouse %></p>
+                  <p class="card-text"><%= r.customerBlock %></p>
+                  <p class="card-text"><%= r.customerRoad %></p>
+                  <form action="/bookings/<%= r._id %>?_method=PUT" method="POST">
+                    <input type="hidden" name="nurseId" value="<%= r.nurseId %>">
+                    <button type="submit" class="btn btn-success" name="status" value="Approved">Accept</button>
+                    <button type="submit" class="btn btn-danger" name="status" value="Declined">Decline</button>
+                </form>
+                </div>
+              </div>
         <% }); %>
     <% } else { %>
         <p>No pending bookings</p>
@@ -27,15 +32,19 @@
   <hr>
   <% if(approvedBooking.length) { %>
     <% approvedBooking.forEach(function(r) { %>
-        <p><%= r.customerName %></p>
-        <p><%= r.customerEmail %></p>
-        <p><%= r.nursePrice %></p>
-        <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
-        <p><%= r.bookingTime %></p>
-        <p><%= r.bookingNotes %></p>
-        <p><%= r.customerHouse %></p>
-        <p><%= r.customerBlock %></p>
-        <p><%= r.customerRoad %></p>
+        <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= r.customerName %></h5>
+              <p class="card-text"><%= r.customerEmail %></p>
+              <p class="card-text"><%= r.nursePrice %></p>
+              <p class="card-text"><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
+              <p class="card-text"><%= r.bookingTime %></p>
+              <p class="card-text"><%= r.bookingNotes %></p>
+              <p class="card-text"><%= r.customerHouse %></p>
+              <p class="card-text"><%= r.customerBlock %></p>
+              <p class="card-text"><%= r.customerRoad %></p>
+            </div>
+          </div>
     <% }); %>
     <% } else { %>
         <p>No approved bookings</p>
@@ -45,22 +54,26 @@
   <hr>
   <% if(declinedBooking.length) { %>
     <% declinedBooking.forEach(function(r) { %>
-        <p><%= r.customerName %></p>
-        <p><%= r.customerEmail %></p>
-        <p><%= r.nursePrice %></p>
-        <p><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
-        <p><%= r.bookingTime %></p>
-        <p><%= r.bookingNotes %></p>
-        <p><%= r.customerHouse %></p>
-        <p><%= r.customerBlock %></p>
-        <p><%= r.customerRoad %></p>
+        <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= r.customerName %></h5>
+              <p class="card-text"><%= r.customerEmail %></p>
+              <p class="card-text"><%= r.nursePrice %></p>
+              <p class="card-text"><%= r.bookingDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: '2-digit', year: 'numeric' }) %></p>
+              <p class="card-text"><%= r.bookingTime %></p>
+              <p class="card-text"><%= r.bookingNotes %></p>
+              <p class="card-text"><%= r.customerHouse %></p>
+              <p class="card-text"><%= r.customerBlock %></p>
+              <p class="card-text"><%= r.customerRoad %></p>
+            </div>
+          </div>
     <% }); %>
     <% } else { %>
         <p>No declined bookings</p>
     <% } %>
 
 <% } else if(user.role === 'Customer') { %>
-    
+
   <h4>My Bookings</h4>
   <hr>
     <% customerBooking.forEach(function(r) { %>
