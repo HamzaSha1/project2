@@ -12,6 +12,9 @@
             <p><%= r.customerHouse %></p>
             <p><%= r.customerBlock %></p>
             <p><%= r.customerRoad %></p>
+            <form action="/bookings/<%= r._id %>?_method=PUT" method="POST">
+            <input type="hidden" name="status" value="">
+            </form>
         <% } %>
     <% }); %>
 <% } else if(user.role === 'Customer') { %>

@@ -4,6 +4,7 @@ const Booking = require("../models/booking");
 module.exports = {
   book: timeslotBooking,
   show: showBookedSessions,
+  update: updateStatus,
 };
 
 async function timeslotBooking(req, res) {
@@ -80,3 +81,5 @@ async function showBookedSessions(req, res) {
     nurseBooking,
   });
 }
+
+async function updateStatus(req, res) {}
