@@ -13,10 +13,13 @@ This project make it effortless for patients to find and book appointments with 
 |Instructor Associate | Ahlam Almutawa |
 |Instructor Associate | Mohamed Faris |
 
+## Wireframes (figma)
+![Screenshot 1](images/userSideDesign.png)
+![Screenshot 2](images/nurseSideDesign.png)
 
 ## Technologies Used
 
-- HTML, CSS & Bootstrap
+- HTML, CSS & Bootstrap 5
 - Node.js
 - Express.js
 - MongoDB
