@@ -226,15 +226,15 @@
                 <div class="card-body">
                     <% if(r.status === 'Approved') { %>
                     <div class="alert alert-success d-flex align-items-center" style="position: absolute; top: 5px; right: 5px; height: 30px;" role="alert">
-                        <% r.status %>
+                        <%= r.status %>
                     </div>
                     <% } else if(r.status === 'Pending') { %>
                     <div class="alert alert-warning d-flex align-items-center" style="position: absolute; top: 5px; right: 5px; height: 30px;" role="alert">
-                        <% r.status %>
+                        <%= r.status %>
                     </div>
                     <% } else if(r.status === 'Declined') { %>
                     <div class="alert alert-danger d-flex align-items-center" style="position: absolute; top: 5px; right: 5px; height: 30px;" role="alert">
-                        <% r.status %>
+                        <%= r.status %>
                     </div>
                     <% } %>
                     <form>
