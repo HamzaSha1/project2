@@ -82,4 +82,9 @@ async function showBookedSessions(req, res) {
   });
 }
 
-async function updateStatus(req, res) {}
+async function updateStatus(req, res) {
+  const bookingId = req.params.id;
+  const bookingStatus = req.body.status;
+  await Booking.updateOne({ _id: bookingId }, { status: bookingStatus });
+  res.redirect(`/bookings/${bookingId}`);
+}
