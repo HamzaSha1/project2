@@ -5,5 +5,5 @@ const isAuthorized = require("../config/isAuthorized");
 
 router.post("/:id", isAuthorized, bookingsCtrl.book);
 router.get("/:id", bookingsCtrl.show);
-
+router.put("/:id", bookingsCtrl.update);
 module.exports = router;
